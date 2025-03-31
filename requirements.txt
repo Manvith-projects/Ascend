@@ -16,3 +16,4 @@ pandas
 nltk
 PyMuPDF
 textract
+gunicorn
