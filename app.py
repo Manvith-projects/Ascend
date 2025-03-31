@@ -31,14 +31,10 @@ app.secret_key = os.getenv("SECRET_KEY")
 
 
 import nltk
-import os
 
-nltk_data_path = "/opt/render/nltk_data"
-if not os.path.exists(nltk_data_path):
-    os.makedirs(nltk_data_path)
+# Check and download the punkt resource if it isn't already available
+nltk.download('punkt')
 
-nltk.data.path.append(nltk_data_path)
-nltk.download('punkt', download_dir=nltk_data_path)
 
 # ----------------------------------------------------------------------------login req----------------------------------------------------------------
 
