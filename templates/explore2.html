@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Careers - Ascend Career Guidance</title>
+    <!-- Static files with Flask/Jinja2 syntax -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/explore-2.css') }}">
+    <style>
+        /* Add more professional styles here */
+        .career-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 40px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: #004080;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .card h3 {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #555;
+        }
+        .card p {
+            line-height: 1.7;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: #a0aec0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .explore-btn {
+          padding: 10px 20px;
+          background-color: #006400;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          margin: 15px auto; /* Center the button horizontally */
+          display: block; /* Make it a block element to apply margin: auto */
+      }
+        button a {
+            text-decoration: none;
+            color: white !important;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #3498db;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container-fluid">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='images/Ascend.jpeg') }}" class="icon-image" alt="logo"/>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse bg-light" id="navbarNav">
+                <ul class="navbar-nav ms-auto bg-light">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}">login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('signup') }}">signup</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Unlock Your Future with AI-Powered Career Guidance</h1>
+                <p>Navigate your career path with confidence...</p>
+                <div class="hero-buttons">
+                    <a href="{{ url_for('signup') }}" class="cta-button">Get Started Now</a>
+                    <a href="#career-cards" class="explore-button">Explore Careers</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <img src="{{ url_for('static', filename='images/hero-image.jpg') }}" alt="Career Exploration" class="hero-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Dynamic career cards section with Jinja2 loop -->
+    <section class="career-cards" id="career-cards">
+        {% for career in careers %}
+        <div class="card">
+            <img src="{{ career.image_url }}" alt="{{ career.title }}" class="card-image">
+            <h2>{{ career.title }}</h2>
+            <h3>Overview</h3>
+            <p>{{ career.overview }}</p>
+            <h3>Pathways</h3>
+            <p>{{ career.pathways|safe }}</p>
+            <h3>Skills</h3>
+            <p>{{ career.skills }}</p>
+        </div>
+        {% endfor %}
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Static footer content -->
+            <div class="footer-section">
+                <h4>About</h4>
+                <a href="{{ url_for('about') }}">About Us</a>
+                <a href="{{ url_for('contact') }}">Contact</a>
+                <a href="{{ url_for('careers') }}">Careers</a>
+            </div>
+            <!-- Other footer sections remain similar -->
+        </div>
+        <p>To Know more please login and shape your career with us</p>
+        <button class="explore-btn"><a href="{{ url_for('signup') }}">Signup</a></button>
+    </footer>
+</body>
+</html>

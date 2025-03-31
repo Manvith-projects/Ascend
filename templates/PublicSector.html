@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Job Portal</title>
+    <link rel="icon" href="static/assets/Alogo.jpeg">
+    <link rel="stylesheet" href="static/css/public_style.css">
+
+</head>
+<header class="header">
+    <a href=""><img src="{{ url_for('static', filename='assets/Ascend.jpeg') }}" alt="logo" class="logo"></a>
+    <nav class="navbar">
+        <a href="{{ url_for('landing') }}" >Home</a>
+        <a href="{{ url_for('explore') }}">Explore</a>
+        <a href="{{ url_for('chatbot') }}" >Chatbot</a>
+        <a href="{{ url_for('blogs') }}">Blogs</a>
+        <a href="{{ url_for('profile') }}">Profile</a>
+    </nav>
+</header>
+<body>
+<div class="top">
+    <div class="header-content">
+        <div class="header-text">
+            <h1>Public Pathways</h1>
+            <p>Explore Career Opportunities Across Various Government Sectors</p>
+        </div>
+        <div class="header-image">
+            <img src="https://karkhana.io/wp-content/uploads/2023/02/image-27.png" alt="government">
+        </div>
+    </div>
+</div>
+
+<main>
+    <section id="sectors-grid">
+        <div class="slider-container">
+            <div class="slider-track">
+                <!-- Sectors will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <section id="jobs-section" class="hidden">
+        <button id="back-button" class="back-btn">← Back to Sectors</button>
+        <h2 id="sector-title"></h2>
+        <div class="slider-container">
+            <div id="jobs-grid" class="slider-track">
+                <!-- Jobs will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <div id="job-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div id="modal-body">
+                <!-- Job details will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>About</h4>
+            <a href="{{ url_for('aboutus') }}">About Us</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('explore') }}">Careers</a>
+        </div>
+        <div class="footer-section">
+            <h4>Resources</h4>
+            <a href="{{ url_for('blogs') }}">Blog</a>
+            <!--a href="#">Guides</a-->
+            <a href="{{ url_for('joinus') }}">Join Us</a>
+        </div>
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <a href="{{ url_for('privacypolicy') }}" style="text-decoration: none">Privacy Policy</a>
+            <a href="{{ url_for('Terms') }}">Terms of Service</a>
+        </div>
+        <div class="footer-section">
+            <h4>Connect</h4>
+            <a href="https://x.com/AscendVvit">Twitter</a>
+            <a href="https://www.linkedin.com/in/ascend-vvit-963b9b352/">LinkedIn</a>
+            <a href="#">Facebook</a>
+        </div>
+    </div>
+</footer>
+
+<script src="static/js/Public_data.js"></script>
+<script src="static/js/PublicSector_main.js"></script>
+</body>
+</html>

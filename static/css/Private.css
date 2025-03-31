@@ -1,0 +1,81 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+nav{
+  height: 40px;
+}
+.logo {
+  max-width: 150px;
+  height: auto;
+  border-radius: 35px;
+
+}
+.svg-image{
+  width: 50%;
+}
+.text-heading{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 100px;
+}
+hr{
+  border: 10px solid grey;
+  border-radius: 20px;
+}
+/* Mobile devices */
+@media only screen and (max-width: 767px) {
+  .svg-image{
+    display:none;
+  }
+  .text-heading{
+    font-size: 60px;
+  }
+}
+
+/* Larger devices (tablets and above) */
+@media only screen and (min-width: 768px) {
+  .svg-image{
+    display: block;
+  }
+}
+
+.sample-block{
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.card{
+  width: 120px;
+}
+.navbar{
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 50px;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  background-color:white;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2)
+}
+
+.logo {
+  max-width: 150px;
+  padding: 10px;
+  border-radius: 35px;
+
+}
+
+.navbar a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #333;
+  font-size: 1rem;
+}
+
+.navbar a:hover {
+  color: #71c397;
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Finder</title>
+    <link rel="icon" href="static/assets/Alogo.jpeg">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nong.css') }}">
+</head>
+<body>
+
+<header class="header">
+    <a href="{{ url_for('get_started') }}">
+        <img src="{{ url_for('static', filename='assets/Ascend.jpeg') }}" class="logo" alt="Company Logo">
+    </a>
+    <nav class="navbar">
+        <a href="{{ url_for('landing') }}">Home</a>
+        <a href="{{ url_for('explore') }}">Explore</a>
+        <a href="{{ url_for('chatbot') }}">Chatbot</a>
+        <a href="{{ url_for('blogs') }}">Blogs</a>
+        <a href="{{ url_for('profile') }}">Profile</a>
+    </nav>
+</header>
+
+<main>
+    <div class="model-container">
+        <h1>Job Finder</h1>
+
+        <form id="job-form">
+            <label for="industry-type">Field of Work:</label>
+            <select id="industry-type" name="industry-type" required>
+                <option value="">Choose a Field</option>
+            </select>
+
+            <label for="role-category">Area of Expertise:</label>
+            <select id="role-category" name="role-category" required>
+                <option value="">Select an Area</option>
+            </select>
+
+            <label for="location">Preferred Location:</label>
+            <input type="text" id="location" name="location" placeholder="Enter City or Country" required>
+
+            <button type="submit">Find Jobs</button>
+        </form>
+
+        <div id="or-text">OR</div>
+
+        <div class="resume-button-container">
+            <a href="{{ url_for('resumepredict') }}" class="resume-button">Upload Resume</a>
+        </div>
+
+        <div id="output-container"></div>
+    </div>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const industryTypeSelect = document.getElementById('industry-type');
+    const roleCategorySelect = document.getElementById('role-category');
+    const locationInput = document.getElementById('location');
+    const jobForm = document.getElementById('job-form');
+    const outputContainer = document.getElementById('output-container');
+
+    const dataset = {
+        industryTypes: ["IT", "Healthcare", "Finance", "Education", "Retail", "Manufacturing"],
+        roleCategories: ["Developer", "Analyst", "Manager", "Designer", "Engineer", "Sales", "Marketing"]
+    };
+
+    function populateDropdown(dropdown, options) {
+        dropdown.innerHTML = '<option value="">Choose an option</option>';
+        options.forEach(option => {
+            const opt = document.createElement('option');
+            opt.value = option;
+            opt.textContent = option;
+            dropdown.appendChild(opt);
+        });
+    }
+
+    populateDropdown(industryTypeSelect, dataset.industryTypes);
+    populateDropdown(roleCategorySelect, dataset.roleCategories);
+
+    jobForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if (!industryTypeSelect.value || !roleCategorySelect.value || !locationInput.value) {
+            alert("Please select all fields before searching.");
+            return;
+        }
+
+        const data = {
+            industryType: industryTypeSelect.value,
+            roleCategory: roleCategorySelect.value,
+            location: locationInput.value
+        };
+
+        outputContainer.innerHTML = "<p>Fetching job recommendations...</p>";
+
+        try {
+            const response = await fetch('/api/job_search', { 
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    input: `${data.industryType} ${data.roleCategory} jobs in ${data.location}` 
+                })
+            });
+
+            if (!response.ok) throw new Error("Failed to fetch job recommendations");
+
+            const result = await response.json();
+            displayOutput(result);
+        } catch (error) {
+            console.error("Error fetching job data:", error);
+            outputContainer.innerHTML = "<p>Error fetching job recommendations. Please try again.</p>";
+        }
+    });
+
+    function displayOutput(result) {
+        outputContainer.innerHTML = '';
+        if (result.jobs && result.jobs.length > 0) {
+            result.jobs.forEach(job => {
+                const jobCard = document.createElement('div');
+                jobCard.className = 'job-card';
+                jobCard.innerHTML = `
+                    <h3>${job.title}</h3>
+                    <p><strong>Company:</strong> ${job.company}</p>
+                    <p><strong>Location:</strong> ${job.location}</p>
+                    <button><a href="${job.apply_link}" target="_blank">Apply Now</a></button>
+                `;
+                outputContainer.appendChild(jobCard);
+            });
+        } else {
+            outputContainer.innerHTML = "<p>No jobs found. Try modifying your search.</p>";
+        }
+    }
+});
+</script>
+
+<style>
+#job-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+      
+
+        #job-form select, 
+        #job-form input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            transition: border 0.3s ease-in-out;
+        }
+
+        #job-form select:focus, 
+        #job-form input:focus {
+            border: 1px solid #0073b1;
+            outline: none;
+        }
+
+        #job-form button {
+            background-color: #0073b1;
+            color: white;
+            font-size: 16px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #job-form button:hover {
+            background-color: #005f8d;
+        }
+
+        /* Location Field */
+        #location {
+            background: #f8f8f8;
+        }
+
+        /* Output Styling */
+        .job-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            background: #f9f9f9;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-card h3 {
+            font-size: 18px;
+            color: #0073b1;
+            margin-bottom: 8px;
+        }
+
+        .job-card p {
+            font-size: 14px;
+            color: #444;
+            margin: 5px 0;
+        }
+
+        .job-card a {
+            text-decoration: none;
+            color: white;
+            background: #28a745;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .job-card a:hover {
+            background: #1e7e34;
+        }
+</style>
+
+</body>
+</html>

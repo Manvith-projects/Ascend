@@ -1,0 +1,145 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.icon-image{
+    width: 120px;
+    border-radius: 35px;
+}
+nav{
+    height: 50px;
+}
+/* Hero Section */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    color: black;
+}
+
+.hero-content {
+    max-width: 50%;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+}
+
+.hero-content p {
+    margin: 20px 0;
+    line-height: 1.8;
+}
+
+.hero-animation {
+    max-width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-animation svg {
+    width: 100%;
+    height: auto;
+}
+
+/* Animation for the SVG Circle */
+
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 251.2;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+.explore-btn {
+    padding: 10px 20px;
+    background-color: #006400;
+    color:#fff ;
+    border: none;
+    margin-left: 20%;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+
+
+/* Career Cards */
+.career-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 40px;
+}
+
+.card {
+    background-color: #e0f7fa;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #006064;
+}
+
+.card h3 {
+    margin-top: 15px;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.card p {
+    line-height: 1.6;
+}
+.logo {
+    max-width: 150px;
+    height: auto;
+    border-radius: 35px;
+
+}
+
+.footer{
+    margin-left: 30%;
+}
+
+/*chatgpt*/
+
+button a {
+    text-decoration: none;    /* Remove underline */
+    color: white !important;  /* Make the text white */
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button {
+    background-color: #3498db;  /* Blue button */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980b9;  /* Darker blue on hover */
+}

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Careers - Ascend Career Guidance</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/explore.css') }}">
+    <style>
+        /* Add more professional styles here */
+        .career-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 40px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+            cursor:pointer
+        }
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: #004080;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .card h3 {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #555;
+        }
+        .card p {
+            line-height: 1.7;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: #a0aec0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .explore-btn {
+          padding: 10px 20px;
+          background-color: #006400;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          margin: 15px auto; /* Center the button horizontally */
+          display: block; /* Make it a block element to apply margin: auto */
+      }
+        button a {
+            text-decoration: none;
+            color: white !important;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #3498db;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+   
+<header class="header">
+    <a href=""><img src="{{ url_for('static', filename='assets/Ascend.jpeg') }}" alt="logo" class="logo"></a>
+    <nav class="navbar">
+        <a href="{{ url_for('landing') }}" style="color: black">Home</a>
+        <a href="{{ url_for('explore') }}"style="color: black">Explore</a>
+        <a href="{{ url_for('chatbot') }}" style="color: black">Chatbot</a>
+        <a href="{{ url_for('blogs') }}"style="color: black">Blogs</a>
+        <a href="{{ url_for('profile') }}" style="color: black">Profile</a>
+    </nav>
+</header>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Unlock Your Future with AI-Powered Career Guidance</h1>
+                <p>Navigate your career path with confidence. Explore diverse opportunities, develop essential skills, and achieve your professional goals with Ascend.</p>
+                <div class="hero-buttons">
+                    <a href="#career-cards" class="explore-button">Explore Careers</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <img src="https://images.unsplash.com/photo-1542626991-cbc4e32524cc?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Career Exploration" class="hero-image">
+            </div>
+        </div>
+    </section>
+
+    <section class="career-cards" id="career-cards">
+        <div class="card">
+            <img src="https://plus.unsplash.com/premium_photo-1661320840402-99bee4f10ae1?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D.jpg" alt="Software Developer" class="card-image">
+            <h2>Software Developer</h2>
+            <h3>Overview</h3>
+            <p>Create and maintain software applications. Learn programming languages and solve problems.</p>
+            <h3>Pathways</h3>
+            <p>- Bachelor's in Computer Science<br>- Online Courses & Bootcamps</p>
+            <h3>Skills</h3>
+            <p>Programming (Python, Java), Problem-solving, Teamwork.</p>
+        </div>
+        <div class="card">
+            <img src="https://plus.unsplash.com/premium_photo-1661391163012-28683b20ffac?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Graphic Designer" class="card-image">
+            <h2>Graphic Designer</h2>
+            <h3>Overview</h3>
+            <p>Create visual content for websites, ads, and more. Use design tools and creativity.</p>
+            <h3>Pathways</h3>
+            <p>- Bachelor's in Graphic Design<br>- Portfolio & Online Courses</p>
+            <h3>Skills</h3>
+            <p>Design software (Adobe Suite), Creativity, Communication.</p>
+        </div>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?q=80&w=2002&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Data Analyst" class="card-image">
+            <h2>Data Analyst</h2>
+            <h3>Overview</h3>
+            <p>Analyze data to find insights and help businesses make decisions. Learn data tools and stats.</p>
+            <h3>Pathways</h3>
+            <p>- Bachelor's in Statistics/Data Science<br>- Online Certifications</p>
+            <h3>Skills</h3>
+            <p>Data analysis, SQL, Excel, Problem-solving.</p>
+        </div>
+        <div class="card">
+            <img src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/2021/05/22121232/Untitled-design-391.png" alt="Digital Marketing Specialist" class="card-image">
+            <h2>Digital Marketing Specialist</h2>
+            <h3>Overview</h3>
+            <p>Promote products and services online. Use social media, ads, and content marketing.</p>
+            <h3>Pathways</h3>
+            <p>- Bachelor's in Marketing<br>- Online Courses & Certifications</p>
+            <h3>Skills</h3>
+            <p>Social media, SEO, Content creation, Analytics.</p>
+        </div>
+        <div class="card">
+            <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://images.ctfassets.net/wp1lcwdav1p1/4z8aSILxB9CTQcuC5YVsNy/93e687aa229e2576cbe271ded062fbe4/GettyImages-1824217014.jpg?w=1500&h=680&q=60&fit=fill&f=faces&fm=jpg&fl=progressive&auto=format%2Ccompress&dpr=1&w=1000" alt="Entrepreneur/Startup Founder" class="card-image">
+            <h2>Entrepreneur/Startup Founder</h2>
+            <h3>Overview<p>Start your own business or tech venture. Solve problems, innovate, and build something new.</p>
+              <h3>Pathways</h3>
+              <p>- Self-learning, Networking<br>- Startup Incubators & Accelerators</p>
+              <h3>Skills</h3>
+              <p>Leadership, Problem-solving, Business acumen, Networking.</p>
+          </div>
+          <div class="card">
+              <img src="https://i0.wp.com/udaipurkiran.com/wp-content/uploads/2024/04/Government-Jobs.jpg?resize=840%2C473&ssl=1" alt="Government Jobs" class="card-image">
+              <h2>Government Jobs</h2>
+              <h3>Overview</h3>
+              <p>Serve the public in various roles. Prepare for exams, contribute to society, and have stable careers.</p>
+              <h3>Pathways</h3>
+              <p>- Competitive Exams (UPSC, SSC)<br>- Specific Department Exams</p>
+              <h3>Skills</h3>
+              <p>General knowledge, Analytical skills, Exam preparation.</p>
+          </div>
+          <div class="card">
+              <img src="https://media.istockphoto.com/id/1415537875/photo/asian-graphic-designer-working-in-office-artist-creative-designer-illustrator-graphic-skill.jpg?s=612x612&w=0&k=20&c=9ufB0QZ-LPcz14zLh909QEEbmDmcfIYzhBsST3hXbMs=" alt="Freelancer/Content Creator" class="card-image">
+              <h2>Freelancer/Content Creator</h2>
+              <h3>Overview</h3>
+              <p>Work independently or create content online. Build your brand, work flexibly, and earn from your skills.</p>
+              <h3>Pathways</h3>
+              <p>- Online Platforms (Upwork, YouTube)<br>- Portfolio Building</p>
+              <h3>Skills</h3>
+              <p>Specific skills (writing, video editing), Self-promotion, Time management.</p>
+          </div>
+          <div class="card">
+              <img src="https://plus.unsplash.com/premium_photo-1661964320064-ca1bfb994d11?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8dGVhY2hlcnxlbnwwfHwwfHx8MA%3D%3D" alt="Teacher/Educator" class="card-image">
+              <h2>Teacher/Educator</h2>
+              <h3>Overview</h3>
+              <p>Inspire and educate students. Develop teaching skills, impact lives, and contribute to education.</p>
+              <h3>Pathways</h3>
+              <p>- Bachelor's in Education (B.Ed)<br>- Teaching Certifications</p>
+              <h3>Skills</h3>
+              <p>Communication, Patience, Subject knowledge, Pedagogy.</p>
+          </div>
+          <div class="card">
+              <img src="https://media.istockphoto.com/id/998313080/photo/smiling-medical-team-standing-together-outside-a-hospital.jpg?s=612x612&w=0&k=20&c=fXzbjAoStQ_8jTM4TQxbHBEjhETI3vq5_7d_JL19eCA=" alt="Healthcare Professional" class="card-image">
+              <h2>Healthcare Professional</h2>
+              <h3>Overview</h3>
+              <p>Provide medical care and support. Learn about health sciences and make a difference.</p>
+              <h3>Pathways</h3>
+              <p>- Medical School (MBBS, Nursing)<br>- Paramedical Courses</p>
+              <h3>Skills</h3>
+              <p>Medical knowledge, Empathy, Critical thinking, Communication.</p>
+          </div>
+          <div class="card">
+              <img src="https://sophiacollege.ac.in/wp-content/uploads/2023/05/A-Day-in-the-Life-of-a-Financial-Analyst-Finance-MBA-TUW.jpg" alt="Financial Analyst" class="card-image">
+              <h2>Financial Analyst</h2>
+              <h3>Overview</h3>
+              <p>Analyze financial data and provide investment advice. Learn about finance and markets.</p>
+              <h3>Pathways</h3>
+              <p>- Bachelor's in Finance/Economics<br>- Certifications (CFA, FRM)</p>
+              <h3>Skills</h3>
+              <p>Financial modeling, Analytical skills, Market knowledge.</p>
+          </div>
+          <div class="card">
+            <img src="https://media.istockphoto.com/id/1181406993/photo/lawyer-working-in-office-law-and-justice-concept.jpg?s=612x612&w=0&k=20&c=DAb5Ive3Otp2PBtQyZl01acM-XKDvJRW0QqYXezm6UE=" alt="Lawyer" class="card-image">
+            <h2>Lawyer</h2>
+            <h3>Overview</h3>
+            <p>Advocate for clients, interpret laws, and provide legal advice. Learn about legal systems and justice.</p>
+            <h3>Pathways</h3>
+            <p>- Bachelor's in Law (LLB)<br>- Bar Exams</p>
+            <h3>Skills</h3>
+            <p>Critical thinking, Public speaking, Research, Negotiation.</p>
+        </div>
+        <div class="card">
+            <img src="https://media.istockphoto.com/id/1063723682/photo/hand-sketching-a-designer-villa-with-pool.jpg?s=612x612&w=0&k=20&c=SlIacvwSEEsZ-2imWLDk6dC0glhaWEg-pOGFSK4YQuI=" alt="Architect" class="card-image">
+            <h2>Architect</h2>
+            <h3>Overview</h3>
+            <p>Design buildings and spaces. Learn about design principles and construction.</p>
+            <h3>Pathways</h3>
+            <p>- Bachelor's in Architecture (B.Arch)<br>- Internship & Licensing</p>
+            <h3>Skills</h3>
+            <p>Design software (AutoCAD), Creativity, Spatial reasoning, Project management.</p>
+        </div>
+        <div class="card">
+            <img src="https://plus.unsplash.com/premium_photo-1661483130622-7b98709ea9be?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8am91cm5hbGlzdHxlbnwwfHwwfHx8MA%3D%3D" alt="Journalist" class="card-image">
+            <h2>Journalist</h2>
+            <h3>Overview</h3>
+            <p>Report news and stories. Learn about current events and media ethics.</p>
+            <h3>Pathways</h3>
+            <p>- Bachelor's in Journalism/Communications<br>- Internships & Portfolio</p>
+            <h3>Skills</h3>
+            <p>Writing, Interviewing, Research, Critical thinking.</p>
+        </div>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1577106263724-2c8e03bfe9cf?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Chef" class="card-image">
+            <h2>Chef</h2>
+            <h3>Overview</h3>
+            <p>Prepare and cook food in restaurants or other settings. Learn about culinary arts and kitchen management.</p>
+            <h3>Pathways</h3>
+            <p>- Culinary School<br>- Apprenticeships</p>
+            <h3>Skills</h3>
+            <p>Cooking techniques, Creativity, Time management, Teamwork.</p>
+        </div>
+        <div class="card">
+            <img src="https://plus.unsplash.com/premium_photo-1682098354910-6823d8fb2ac2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Photographer" class="card-image">
+            <h2>Photographer</h2>
+            <h3>Overview</h3>
+            <p>Capture images for various purposes. Learn about photography techniques and editing.</p>
+            <h3>Pathways</h3>
+            <p>- Photography Courses<br>- Portfolio Building</p>
+            <h3>Skills</h3>
+            <p>Photography equipment, Editing software, Creativity, Communication.</p>
+        </div>
+        <div class="card">
+            <img src="https://aaft.com/blog/wp-content/uploads/2024/03/46268-1024x683.jpg" alt="Event Planner" class="card-image">
+            <h2>Event Planner</h2>
+            <h3>Overview</h3>
+            <p>Organize and manage events. Learn about event coordination and logistics.</p>
+            <h3>Pathways</h3>
+            <p>- Event Management Courses<br>- Internships</p>
+            <h3>Skills</h3>
+            <p>Organization, Communication, Time management, Problem-solving.</p>
+        </div>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Fitness Trainer" class="card-image">
+            <h2>Fitness Trainer</h2>
+            <h3>Overview</h3>
+            <p>Help clients achieve fitness goals. Learn about exercise science and nutrition.</p>
+            <h3>Pathways</h3>
+            <p>- Certification Courses<br>- Practical Experience</p>
+            <h3>Skills</h3>
+            <p>Fitness knowledge, Communication, Motivation, Interpersonal skills.</p>
+        </div>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1593697820910-a2b68670c1e1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Musician" class="card-image">
+            <h2>Musician</h2>
+            <h3>Overview</h3>
+            <p>Create and perform music. Learn about music theory and instruments.</p>
+            <h3>Pathways</h3>
+            <p>- Music School/Conservatory<br>- Self-learning & Practice</p>
+            <h3>Skills</h3>
+            <p>Musical talent, Creativity, Practice, Performance skills.</p>
+        </div>
+        <div class="card">
+            <img src="https://media.istockphoto.com/id/1140713578/photo/young-trainee-of-interior-design-company-working-with-boss.jpg?s=612x612&w=0&k=20&c=ywL7JwAkg7uDu-KfAO2wz2mlIKOVpmBzE4SS6hPEJQk=" alt="Interior Designer" class="card-image">
+            <h2>Interior Designer</h2>
+            <h3>Overview</h3>
+            <p>Design and decorate interior spaces. Learn about design principles and materials.</p>
+            <h3>Pathways</h3>
+            <p>- Bachelor's in Interior Design<br>- Portfolio & Internships</p>
+            <h3>Skills</h3>
+            <p>Design software, Creativity, Spatial awareness, Communication.</p>
+        </div>
+        <div class="card">
+            <img src="https://media.istockphoto.com/id/1356598853/photo/anonymous-content-creator-rendering-3d-model.jpg?s=612x612&w=0&k=20&c=C0flOcbClqNYsZ6_mCxdUW95C1CCLsRRjsGLh9UNLgY=" alt="Animator" class="card-image">
+            <h2>Animator</h2>
+            <h3>Overview</h3>
+            <p>Create animated content for films, games, or ads. Learn about animation techniques and software.</p>
+            <h3>Pathways</h3>
+            <p>- Animation Courses<br>- Portfolio Building</p>
+            <h3>Skills</h3>
+            <p>Animation software, Creativity, Storytelling, Visual communication.</p>
+        </div>
+        <div class="card">
+            <img src="https://t4.ftcdn.net/jpg/00/40/74/89/360_F_40748968_kufcx1zEOOtI4cUvxVcDEKiUAm9B5rog.jpg" alt="Librarian" class="card-image">
+            <h2>Librarian</h2>
+            <h3>Overview</h3>
+            <p>Manage and organize information resources. Learn about information science and research.</p>
+            <h3>Pathways</h3>
+            <p>- Master's in Library Science (MLS)<br>- Certifications</p>
+            <h3>Skills</h3>
+            <p>Information management, Research, Communication, Organization.</p>
+        </div>
+        <div class="card">
+            <img src="https://media.istockphoto.com/id/1032296056/photo/young-woman-and-man-in-headphones-learning-different-languages-communicating.jpg?s=612x612&w=0&k=20&c=-lgeXoB7t8Uwp5gIRkZxhcgIezrYu3wIosP2_sWBIew=" alt="Translator" class="card-image">
+            <h2>Translator</h2>
+            <h3>Overview</h3>
+            <p>Convert written or spoken material from one language to another. Learn about languages and cultures.</p>
+            <h3>Pathways</h3>
+            <p>- Language Degrees<br>- Certifications</p>
+            <h3>Skills</h3>
+            <p>Language proficiency, Cultural awareness, Writing, Communication.</p>
+        </div>
+        <div class="card">
+            <img src="https://media.istockphoto.com/id/593320814/photo/my-work-necessitates-working-with-infectious-specimens.jpg?s=612x612&w=0&k=20&c=RsvmhGOPS3MqohAaeHCtXPgtEk2LyxkNNx-shFOx0o0=" alt="Forensic Scientist" class="card-image">
+            <h2>Forensic Scientist</h2>
+            <h3>Overview</h3>
+            <p>Analyze evidence from crime scenes. Learn about scientific methods and criminal justice.</p>
+            <h3>Pathways</h3>
+            <p>- Bachelor's in Forensic Science<br>- Lab Experience</p>
+            <h3>Skills</h3>
+            <p>Analytical skills, Attention to detail, Scientific methods, Problem-solving.</p>
+        </div>
+        <div class="card">
+            <img src="https://img.freepik.com/free-photo/set-designer-work-indoors_23-2149837022.jpg" alt="Urban Planner" class="card-image">
+            <h2>Urban Planner</h2>
+            <h3>Overview</h3>
+            <p>Plan and develop cities and communities. Learn about urban design and policy.</p>
+            <h3>Pathways</h3>
+            <p>- Master's in Urban Planning<br>- Internships</p>
+            <h3>Skills</h3>
+            <p>Planning software, Policy analysis, Communication, Problem-solving.</p>
+        </div>
+        <div class="card">
+            <img src="https://image-assets.eu-2.volcanic.cloud/api/v1/assets/images/12e3101e5519ee30cee808126a599db1?webp_fallback=png" alt="Supply Chain Manager" class="card-image">
+            <h2>Supply Chain Manager</h2>
+            <h3>Overview</h3>
+            <p>Manage the flow of goods and services. Learn about logistics and operations.</p>
+            <h3>Pathways</h3>
+            <p>- Bachelor's in Supply Chain Management<br>- Certifications</p>
+            <h3>Skills</h3>
+            <p>Logistics, Analysis, Communication, Negotiation.</p>
+        </div>
+        <div class="card">
+            <img src="https://res.cloudinary.com/highereducation/images/f_auto,q_auto/v1664377397/Accounting.com/Actuary_Career_Overview_512078089/Actuary_Career_Overview_512078089.jpg?_i=AA" alt="Actuary" class="card-image">
+            <h2>Actuary</h2>
+            <h3>Overview</h3>
+            <p>Assess and manage financial risks. Learn about mathematics and statistics.</p>
+            <h3>Pathways</h3>
+            <p>- Bachelor's in Actuarial Science/Mathematics<br>- Professional Exams</p>
+            <h3>Skills</h3>
+            <p>Mathematical modeling, Statistics, Analysis, Risk assessment.</p>
+        </div>
+        <div class="card">
+            <img src="https://img.freepik.com/premium-photo/experiment-biotechnology-with-chemistry-science_23-2150365013.jpg?semt=ais_hybrid" alt="Biotechnologist" class="card-image">
+            <h2>Biotechnologist</h2>
+            <h3>Overview</h3>
+            <p>Apply biological principles to develop products and technologies. Learn about biology and chemistry.</p>
+            <h3>Pathways</h3>
+            <p>- Bachelor's in Biotechnology<br>- Research Experience</p>
+            <h3>Skills</h3>
+            <p>Lab techniques, Research, Analysis, Problem-solving.</p>
+        </div>
+        <div class="card">
+            <img src="https://blog.shunya.net/.a/6a00d8341dd33453ef0133f5b2ecfe970b" alt="Robotics Engineer" class="card-image">
+            <h2>Robotics Engineer</h2>
+            <h3>Overview</h3>
+            <p>Design and build robots and automated systems. Learn about mechanical and electrical engineering.</p>
+            <h3>Pathways</h3>
+            <p>- Bachelor's in Robotics Engineering<br>- Projects & Internships</p>
+            <h3>Skills</h3>
+            <p>Mechanical design, Programming, Electronics, Problem-solving.</p>
+        </div>
+        <div class="card">
+            <img src="https://img.freepik.com/premium-photo/image-sustainability-specialist-using-tablet-environmental-risk-assessment_39665-15385.jpg" alt="Sustainability Specialist" class="card-image">
+            <h2>Sustainability Specialist</h2>
+            <h3>Overview</h3>
+            <p>Promote sustainable practices in organizations. Learn about environmental science and policy.</p>
+            <h3>Pathways</h3>
+            <p>- Bachelor's in Environmental Science/Sustainability<br>- Certifications</p>
+            <h3>Skills</h3>
+            <p>Environmental knowledge, Policy analysis, Communication, Project management.</p>
+        </div>
+        <div class="card">
+            <img src="https://emeritus.org/in/wp-content/uploads/sites/3/2022/09/data-scientist.jpg.optimal.jpg" alt="Data Scientist" class="card-image">
+            <h2>Data Scientist</h2>
+            <h3>Overview</h3>
+            <p>Use statistical and machine learning techniques to analyze and interpret complex data. Learn advanced data skills.</p>
+            <h3>Pathways</h3>
+            <p>- Master's/PhD in Data Science/Statistics<br>- Projects & Research</p>
+            <h3>Skills</h3>
+            <p>Machine learning, Statistical modeling, Programming (Python, R), Data visualization.</p>
+        </div>
+        <div class="card">
+            <img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2024/08/The-AI-Scientist-Revolutionizing-Automated-Scientific-Discovery-01-scaled.webp" alt="AI Researcher" class="card-image">
+            <h2>AI Researcher</h2>
+            <h3>Overview</h3>
+            <p>Develop new algorithms and models in artificial intelligence. Learn advanced AI concepts and techniques.</p>
+            <h3>Pathways</h3>
+            <p>- PhD in Computer Science/AI<br>- Research Publications</p>
+            <h3>Skills</h3>
+            <p>Machine learning, Deep learning, Programming, Research skills.</p>
+        </div>
+        <div class="card">
+            <img src="https://www.igtsolutions.com/wp-content/uploads/2022/09/ui-ux-min.png" alt="UX/UI Designer" class="card-image">
+            <h2>UX/UI Designer</h2>
+            <h3>Overview</h3>
+            <p>Design user-friendly interfaces for websites and apps. Learn about user experience and design principles.</p>
+            <h3>Pathways</h3>
+            <p>- Bachelor's in Design/HCI<br>- Portfolio & Projects</p>
+            <h3>Skills</h3>
+            <p>Design software (Figma, Adobe XD), User research, Prototyping, Visual design.</p>
+        </div>
+        <div class="card">
+            <img src="https://www.cyberdegrees.org/wp-content/uploads/2020/10/GettyImages-1093461000.jpg" alt="Cybersecurity Analyst" class="card-image">
+            <h2>Cybersecurity Analyst</h2>
+            <h3>Overview</h3>
+            <p>Protect computer systems and networks from cyber threats. Learn about cybersecurity tools and techniques.</p>
+            <h3>Pathways</h3>
+            <p>- Bachelor's in Cybersecurity<br>- Certifications (CompTIA Security+, CISSP)</p>
+            <h3>Skills</h3>
+            <p>Network security, Threat analysis, Ethical hacking, Problem-solving.</p>
+        </div>
+  
+      </section>
+  
+        </body>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <a href="{{ url_for('aboutus') }}">About Us</a>
+                    <a href="{{ url_for('contact') }}">Contact</a>
+                    <a href="{{ url_for('explore') }}">Careers</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="{{ url_for('blogs') }}">Blog</a>
+                    <!--a href="#">Guides</a-->
+                    <a href="{{ url_for('joinus') }}">Join Us</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <a href="{{ url_for('privacypolicy') }}" style="text-decoration: none">Privacy Policy</a>
+                    <a href="{{ url_for('Terms') }}">Terms of Service</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <a href="https://x.com/AscendVvit">Twitter</a>
+                    <a href="https://www.linkedin.com/in/ascend-vvit-963b9b352/">LinkedIn</a>
+                    <a href="#">Facebook</a>
+                </div>
+            </div>
+        </footer>
+        
+        </html>

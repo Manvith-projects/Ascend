@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    
+</head>
+<body>
+
+<nav class="navbar">
+    <a class="navbar-brand" href="{{ url_for('landing') }}">
+        <img src="{{ url_for('static', filename='assets/Ascend.jpeg') }}" alt="logo" class="logo">
+    </a>
+    
+
+</nav>
+
+<div class="main-container">
+    <div class="profile-card">
+        <img id="profile-picture" src="{{ url_for('static', filename='assets/default-profile.png') }}" referrerpolicy="no-referrer" alt="Profile Picture">
+        <h1 id="user-name">Guest User</h1>
+        <p>Email: <span id="user-email">No email available</span></p>
+        <p>Member since: <span id="user-creation-time">Unknown</span></p>
+        
+        <p>Bio: <span id="bio-text"></span></p>
+        <p>Skills: <span id="skills-text"></span></p>
+        
+        <button id="edit-profile" class="btn btn-primary">Edit</button>
+        
+        <textarea id="bio" placeholder="Write a short bio..." style="display:none;"></textarea>
+        <input type="text" id="skills" placeholder="Add your skills..." style="display:none;">
+        <input type="file" id="profile-pic-upload" accept="image/*" style="display:none;">
+        
+        <button id="save-profile" onclick="updateProfile()" style="display: none;" class="btn btn-success">Save</button>
+        <button onclick="logout()" class="btn btn-danger">Logout</button>
+    </div>
+
+    <div class="blogs-section">
+    <h2>Your Blogs</h2>
+    <div id="blog-form" style="display: none;">
+        <input type="hidden" id="blog-id">  <!-- Hidden input to track which blog is being updated -->
+        <input type="text" id="blog-title" placeholder="Blog Title" class="form-control">
+        <input type="file" id="blog-image" accept="image/*" class="form-control">
+        <textarea id="blog-content" placeholder="Write your blog content..." class="form-control"></textarea>
+        <button onclick="submitBlog()" id="submit-blog" class="btn btn-success">Post Blog</button>
+        <button onclick="updateBlog()" id="update-blog-btn" class="btn btn-warning" style="display: none;">Update Blog</button>
+    </div>
+    <button id="add-blog" class="btn btn-primary">Add Blog</button>
+    <div id="user-blogs">
+        <p>Loading your blogs...</p>
+    </div>
+</div>
+
+</div>
+
+<script>
+// Ensure Firebase is initialized only once
+if (!firebase.apps.length) {
+    firebase.initializeApp({
+        apiKey: "AIzaSyCX5fg4A-OYjtapDOKyOUd0iTnxrKX4t7Y",
+        authDomain: "career-mentor-dbffc.firebaseapp.com",
+        projectId: "career-mentor-dbffc",
+        storageBucket: "career-mentor-dbffc.appspot.com",
+        messagingSenderId: "632733746095",
+        appId: "1:632733746095:web:df7f51f135cbdb552d255a",
+        measurementId: "G-PPZRTYYGM6"
+    });
+}
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+const IMGUR_CLIENT_ID = "c140503f46c2d98"; // Replace with your Imgur client ID
+
+// Ensure authentication state is persisted
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    .catch(error => console.error("Persistence Error:", error));
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const refreshCount = sessionStorage.getItem("refreshCount") || 0;
+
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            updateUserProfile(user);
+            loadUserBlogs(user.uid);
+            sessionStorage.removeItem("refreshCount"); // Reset on login
+        } else {
+            if (refreshCount < 2) {
+                sessionStorage.setItem("refreshCount", Number(refreshCount) + 1);
+                location.reload(); // Refresh the page
+            } else {
+                window.location.href = "/login";
+            }
+        }
+    });
+
+    document.getElementById("edit-profile")?.addEventListener("click", () => toggleEditProfile(true));
+    document.getElementById("add-blog")?.addEventListener("click", () => {
+        document.getElementById("blog-form").style.display = "block";
+    });
+});
+
+// Detect when the user comes back via the back button
+window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+        const refreshCount = sessionStorage.getItem("refreshCount") || 0;
+        if (refreshCount < 2) {
+            sessionStorage.setItem("refreshCount", Number(refreshCount) + 1);
+            location.reload(); // Refresh again
+        }
+    }
+});
+
+
+
+function updateUserProfile(user) {
+    document.getElementById("user-name").textContent = user.displayName || "No Name"||data.name;
+    document.getElementById("user-email").textContent = user.email;
+    document.getElementById("profile-picture").src = user.photoURL || "/static/assets/default-profile.png";
+    document.getElementById("user-creation-time").textContent = new Date(user.metadata.creationTime).toLocaleDateString() || "Unknown";
+
+    db.collection("users").doc(user.uid).get().then(doc => {
+        if (doc.exists) {
+            const data = doc.data();
+            document.getElementById("bio-text").textContent = data.bio || "No bio available";
+            document.getElementById("skills-text").textContent = data.skills || "No skills added";
+        }
+    });
+}
+
+function toggleEditProfile(show) {
+    document.getElementById("bio-text").style.display = show ? "none" : "block";
+    document.getElementById("skills-text").style.display = show ? "none" : "block";
+    document.getElementById("bio").style.display = show ? "block" : "none";
+    document.getElementById("skills").style.display = show ? "block" : "none";
+    document.getElementById("profile-pic-upload").style.display = show ? "block" : "none";
+    document.getElementById("save-profile").style.display = show ? "inline-block" : "none";
+    document.getElementById("edit-profile").style.display = show ? "none" : "inline-block";
+}
+
+async function uploadImageToImgur(file) {
+    const formData = new FormData();
+    formData.append("image", file);
+
+    const response = await fetch("https://api.imgur.com/3/image", {
+        method: "POST",
+        headers: { Authorization: `Client-ID ${IMGUR_CLIENT_ID}` },
+        body: formData
+    });
+
+    const data = await response.json();
+    if (data.success) return data.data.link;
+    throw new Error("Image upload failed");
+}
+
+async function submitBlog() {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const title = document.getElementById("blog-title").value;
+    const content = document.getElementById("blog-content").value;
+    const imageFile = document.getElementById("blog-image").files[0];
+
+    let imageUrl = "";
+    if (imageFile) {
+        try {
+            imageUrl = await uploadImageToImgur(imageFile);
+        } catch (error) {
+            console.error("Error uploading image:", error);
+            alert("Error uploading image. Please try again.");
+            return;
+        }
+    }
+
+    db.collection("blogs").add({
+        title,
+        content,
+        imageUrl,
+        author: user.displayName || "Anonymous",
+        userId: user.uid,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+        alert("Blog posted successfully!");
+        location.reload();
+    }).catch(error => console.error("Error posting blog:", error));
+}
+
+function loadUserBlogs(userId) {
+    db.collection("blogs").where("userId", "==", userId).orderBy("timestamp", "desc").get()
+        .then(querySnapshot => {
+            const userBlogs = document.getElementById("user-blogs");
+            userBlogs.innerHTML = "";
+            querySnapshot.forEach(doc => {
+                const blog = doc.data();
+                const blogElement = document.createElement("div");
+                blogElement.className = "blog-item";
+                blogElement.innerHTML = `
+                    <h3>${blog.title}</h3>
+                    ${blog.imageUrl ? `<img src="${blog.imageUrl}"  alt="Blog Image" style="max-width: 100%;">` : ""}
+                    <p>${blog.content}</p>
+                    <button class="btn btn-primary" onclick="editBlog('${doc.id}', '${blog.title}', '${blog.content}', '${blog.imageUrl}')">Edit</button>
+                    <button class="btn btn-danger" onclick="deleteBlog('${doc.id}')">Delete</button>
+                `;
+                userBlogs.appendChild(blogElement);
+            });
+        }).catch(error => console.error("Error loading blogs:", error));
+}
+
+function editBlog(blogId, title, content, imageUrl) {
+    document.getElementById("blog-title").value = title;
+    document.getElementById("blog-content").value = content;
+    document.getElementById("blog-form").style.display = "block";
+    document.getElementById("update-blog-btn").style.display = "inline-block";
+    document.getElementById("submit-blog").style.display = "none";
+    document.getElementById("update-blog-btn").onclick = () => updateBlog(blogId, imageUrl);
+}
+
+async function updateBlog(blogId, existingImageUrl) {
+    const title = document.getElementById("blog-title").value;
+    const content = document.getElementById("blog-content").value;
+    const imageFile = document.getElementById("blog-image").files[0];
+
+    let imageUrl = existingImageUrl;
+    if (imageFile) {
+        try {
+            imageUrl = await uploadImageToImgur(imageFile);
+        } catch (error) {
+            console.error("Error uploading image:", error);
+            alert("Error uploading image. Please try again.");
+            return;
+        }
+    }
+
+    db.collection("blogs").doc(blogId).update({
+        title,
+        content,
+        imageUrl,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+        alert("Blog updated successfully!");
+        location.reload();
+    }).catch(error => console.error("Error updating blog:", error));
+}
+
+function deleteBlog(blogId) {
+    db.collection("blogs").doc(blogId).delete().then(() => {
+        alert("Blog deleted successfully!");
+        location.reload();
+    }).catch(error => console.error("Error deleting blog:", error));
+}
+
+async function updateProfile() {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const bio = document.getElementById("bio").value;
+    const skills = document.getElementById("skills").value;
+    const profilePicFile = document.getElementById("profile-pic-upload").files[0];
+
+    let profilePicUrl = user.photoURL;
+    if (profilePicFile) {
+        try {
+            profilePicUrl = await uploadImageToImgur(profilePicFile);
+        } catch (error) {
+            alert("Error uploading profile picture. Please try again.");
+            return;
+        }
+    }
+
+    db.collection("users").doc(user.uid).update({ bio, skills, photoURL: profilePicUrl })
+        .then(() => user.updateProfile({ photoURL: profilePicUrl }))
+        .then(() => {
+            alert("Profile updated successfully!");
+            location.reload();
+        })
+        .catch(console.error);
+}
+
+function logout() {
+    auth.signOut().then(() => window.location.href = "/login").catch(console.error);
+}
+
+
+</script>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f2ef;
+        margin: 0;
+        padding: 0;
+    }
+    .navbar {
+        background-color: #0073b1;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .navbar .logo {
+        height: 40px;
+    }
+    .main-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+    }
+    .profile-card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+        position: sticky;
+        top: 20px;
+        align-self: flex-start;
+    }
+    .profile-card img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+    .profile-card h1 {
+        margin: 10px 0;
+        font-size: 24px;
+        color: #333;
+    }
+    .profile-card p {
+        margin: 5px 0;
+        color: #666;
+    }
+    .profile-card .btn {
+        margin-top: 10px;
+    }
+    .blogs-section {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 800px;
+        flex-grow: 1;
+    }
+    .blogs-section h2 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+    .form-control {
+        width: 100%;
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .btn-primary {
+        background-color: #0073b1;
+        color: #fff;
+    }
+    .btn-success {
+        background-color: #28a745;
+        color: #fff;
+    }
+    .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+    }
+    .blog-item {
+        border-bottom: 1px solid #ccc;
+        padding: 10px 0;
+        text-align: left;
+    }
+    .blog-item h3 {
+        margin: 0;
+        font-size: 20px;
+        color: #0073b1;
+    }
+    #bb{
+        padding: 20px;
+        background-color: #0073b1;
+    }
+    #bio, #skills {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-top: 10px;
+    display: block;
+}
+
+#save-profile {
+    margin-top: 10px;
+    width: 100%;
+}
+
+    .blog-item p {
+        margin: 5px 0;
+        color: #666;
+    }
+    .blog-item img {
+        max-width: 100%;
+        margin-top: 10px;
+        border-radius: 5px;
+    }
+    .blog-item button {
+        margin-right: 10px;
+    }
+    @media (max-width: 768px) {
+        .main-container {
+            flex-direction: column;
+            align-items: center;
+        }
+        .profile-card {
+            position: static;
+            width: 100%;
+            max-width: 600px;
+        }
+        .blogs-section {
+            width: 100%;
+            max-width: 600px;
+        }
+    }
+</style>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        firebase.auth().onAuthStateChanged(user => {
+            if (!user) {
+                // Redirect to login page if not authenticated
+                window.location.href = "login.html";
+            }
+        });
+    });
+
+    "use strict";
+
+document.addEventListener("DOMContentLoaded", function () {
+    auth.onAuthStateChanged((user) => {
+        if (!user) {
+            // Redirect to login if user is not authenticated
+            window.location.href = "{{ url_for('login') }}";
+        }
+    });
+});
+</script>
+</body>
+</html>

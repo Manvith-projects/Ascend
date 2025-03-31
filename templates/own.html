@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/own.css">
+    <link rel="icon" href="static/assets/Alogo.jpeg">
+    <title>StartDeas</title>
+</head>
+<body>
+<header class="header">
+    <a href=""><img src="{{ url_for('static', filename='assets/Ascend.jpeg') }}" alt="logo" class="logo"></a>
+    <nav class="navbar">
+        <a href="{{ url_for('landing') }}" >Home</a>
+        <a href="{{ url_for('explore') }}">Explore</a>
+        <a href="{{ url_for('still_in_progress') }}" >About</a>
+        <a href="{{ url_for('chatbot') }}" >Chatbot</a>
+        <a href="{{ url_for('blogs') }}">Blogs</a>
+        <a href="{{ url_for('index') }}" >Logout</a>
+    </nav>
+</header>
+<div class="container">
+    <header class="top">
+        <h1>StraDeas</h1>
+        <form class="search-box">
+            <input type="search" placeholder="The field that i want to bring my startup">
+        </form>
+        <p>Results Count : 0</p>
+    </header>
+    <div class="results"></div>
+</div>
+<script src="static/js/own.js"></script>
+</body>
+
+</html>

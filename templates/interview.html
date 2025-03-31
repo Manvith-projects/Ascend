@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Interview Bot</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>AI Interview Assistant</h1>
+      <p>Upload your resume and practice your interview skills</p>
+    </header>
+
+    <main>
+      <div class="stages">
+        <div class="stage active" id="stage-upload">
+          <h2>Upload Your Resume</h2>
+          <div class="upload-container" id="upload-area">
+            <p>Drag & drop your resume here or</p>
+            <label for="resume-upload" class="upload-btn">Browse Files</label>
+            <input type="file" id="resume-upload" accept=".pdf,.doc,.docx" hidden>
+            <p class="file-info" id="file-info"></p>
+            <button class="action-btn" id="upload-btn" disabled>Upload Resume</button>
+          </div>
+          <button class="action-btn" id="start-btn" disabled>Start Interview</button>
+        </div>
+
+        <div class="stage" id="stage-interview" style="display: none;">
+          <h2>Interview Questions</h2>
+          <p id="question-text"></p>
+            <textarea id="answer-input" placeholder="Type your answer here..." style="width: 100%; height: 150px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"></textarea>
+          <button class="action-btn" id="submit-answer">Submit Answer</button>
+          <div id="evaluation-result" style="display: none;"></div>
+
+          <div class="navigation">
+            <button class="action-btn" id="prev-question" disabled>Previous</button>
+            <button class="action-btn" id="next-question" disabled>Next</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2025 AI Interview Assistant | Privacy Policy | Terms of Service</p>
+    </footer>
+  </div>
+
+  <script>
+    let resumeText = "";
+    let questions = [];
+    let currentQuestionIndex = 0;
+
+    document.getElementById('resume-upload').addEventListener('change', function () {
+      let file = this.files[0];
+      let fileInfo = document.getElementById('file-info');
+      let uploadBtn = document.getElementById('upload-btn');
+
+      if (file) {
+        fileInfo.innerText = "Selected: " + file.name;
+        uploadBtn.removeAttribute("disabled");
+      } else {
+        fileInfo.innerText = "";
+        uploadBtn.setAttribute("disabled", "true");
+      }
+    });
+
+    document.getElementById('upload-btn').addEventListener('click', function () {
+      let fileInput = document.getElementById('resume-upload');
+      let file = fileInput.files[0];
+
+      if (!file) {
+        alert("Please select a file first.");
+        return;
+      }
+
+      let formData = new FormData();
+      formData.append("file", file);
+
+      fetch("/upload", {
+        method: "POST",
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          alert("Upload failed: " + data.error);
+        } else {
+          alert("Resume uploaded successfully!");
+          resumeText = data.resume_text;
+          document.getElementById('start-btn').removeAttribute("disabled");
+        }
+      })
+      .catch(error => {
+        alert("Error uploading file. Try again.");
+        console.error("Error:", error);
+      });
+    });
+
+    document.getElementById('start-btn').addEventListener('click', function () {
+      fetch("/ask-questions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ resume_text: resumeText })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          alert("Error generating questions: " + data.error);
+        } else {
+          questions = data.questions;
+          document.getElementById('stage-upload').style.display = "none";
+          document.getElementById('stage-interview').style.display = "block";
+          displayQuestion();
+        }
+      })
+      .catch(error => console.error("Error:", error));
+    });
+
+    function displayQuestion() {
+      document.getElementById('question-text').innerText = questions[currentQuestionIndex];
+      document.getElementById('answer-input').value = "";
+      document.getElementById('evaluation-result').style.display = "none";
+
+      document.getElementById('prev-question').disabled = (currentQuestionIndex === 0);
+      document.getElementById('next-question').disabled = (currentQuestionIndex === questions.length - 1);
+    }
+
+    document.getElementById('submit-answer').addEventListener('click', function () {
+      let answer = document.getElementById('answer-input').value;
+      let question = questions[currentQuestionIndex];
+
+      if (!answer.trim()) {
+        alert("Please enter an answer.");
+        return;
+      }
+
+      fetch("/evaluate-answer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question, resume_text: resumeText, answer })
+      })
+      .then(response => response.json())
+      .then(data => {
+        let evaluationResult = document.getElementById('evaluation-result');
+        if (data.evaluation) {
+          evaluationResult.innerHTML = `<h3>Feedback:</h3><p>${data.evaluation}</p>`;
+          evaluationResult.style.display = "block";
+        } else {
+          evaluationResult.innerHTML = `<h3>Feedback:</h3><p>No feedback received.</p>`;
+          evaluationResult.style.display = "block";
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("There was an error processing your answer.");
+      });
+    });
+
+    document.getElementById('prev-question').addEventListener('click', function () {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        displayQuestion();
+      }
+    });
+
+    document.getElementById('next-question').addEventListener('click', function () {
+      if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        displayQuestion();
+      }
+    });
+  </script>
+</body>
+</html>

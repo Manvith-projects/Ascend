@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Us - Ascend Career Guidance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/join_us.css') }}">
+    <link rel="icon" href="static/assets/Alogo.jpeg">
+    <style>
+        /* ... (Your existing styles) ... */
+        .join-section {
+            background-color: #fff;
+            padding: 40px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .join-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        .join-section h2 {
+            color: #004080;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .join-section p {
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 25px;
+        }
+        .join-section input[type="email"],
+        .join-section input[type="text"] {
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            width: calc(100% - 32px);
+            transition: border-color 0.3s ease;
+        }
+        .join-section input[type="email"]:focus,
+        .join-section input[type="text"]:focus {
+            border-color: #004080;
+            outline: none;
+        }
+        .join-section button {
+            background-color: #004080;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+        .join-section button:hover {
+            background-color: #0056b3;
+        }
+        .join-section button:active {
+            transform: translateY(1px);
+        }
+        .join-section ul {
+            padding-left: 20px;
+            margin-bottom: 25px;
+        }
+        .join-section ul li {
+            line-height: 1.7;
+            color: #555;
+        }
+        .join-section a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .join-section a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href=""><img src="{{ url_for('static', filename='assets/Ascend.jpeg') }}" alt="logo" class="logo"></a>
+        </div>
+        <h1>Join Our Career & Startup Community!</h1>
+    </header>
+
+    <main>
+        <section class="join-section">
+            <h2>Advance Your Career</h2>
+            <p>Get ahead in your career with personalized resources and community support:</p>
+            <ul>
+                <li>Receive career tips, industry insights, and job market updates directly to your inbox.</li>
+                <li>Create a profile to showcase your skills and connect with mentors and employers.</li>
+                <li>Access our resource library for resume building, interview preparation, and more.</li>
+                <li>Join community forums and online groups to network with peers and industry experts.</li>
+            </ul>
+            <input type="text" placeholder="Your Name">
+            <input type="email" placeholder="Your Email">
+            <button id="newsletter-signup">Subscribe Now</button>
+            <button onclick="location.href='profile_creation.html'">Create Your Profile</button>
+            <button onclick="location.href='{{ url_for('explore') }}'">Explore</button>
+            <button onclick="location.href='community.html'">Join the Community</button>
+        </section>
+
+        <section class="join-section">
+            <h2>Dive into the Startup World</h2>
+            <p>Explore the world of startups and innovation:</p>
+            <ul>
+                <li>Stay updated with the latest startup news and trends.</li>
+                <li>Learn from successful startups and their journeys.</li>
+                <li>Discover resources and tools to help you launch or grow your own startup.</li>
+            </ul>
+            <button onclick="location.href='news.html'">Read Startup News</button>
+            <button onclick="location.href='startups.html'">Explore Startups</button>
+        </section>
+
+        <section class="join-section">
+            <h2>Share Your Expertise</h2>
+            <p>Contribute to our community and help others succeed:</p>
+            <ul>
+                <li>Share your knowledge and insights by contributing articles and resources.</li>
+                <li>Become a mentor and guide aspiring professionals in their career journeys.</li>
+                <li>Connect with like-minded professionals and expand your network.</li>
+            </ul>
+            <button onclick="location.href='contributor_application.html'">Become a Contributor</button>
+            <button onclick="location.href='mentor_registration.html'">Become a Mentor</button>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About</h4>
+                <a href="#">About Us</a>
+                <a href="ContactUs.html">Contact</a>
+                <a href="#">Careers</a>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="#">Blog</a>
+                <a href="#">Guides</a>
+                <a href="#">Research</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="Terms of Service.html">Terms of Service</a>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('newsletter-signup').addEventListener('click', function(){
+            let name = document.querySelector('input[type="text"]').value;
+            let email = document.querySelector('input[type="email"]').value;
+            console.log("name: ", name, " email: ", email);
+            //Here would be the code to send the user info to the backend.
+            alert("Thank you for subscribing!");
+        })
+    </script>
+</body>
+</html>

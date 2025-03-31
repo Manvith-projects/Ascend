@@ -1,0 +1,68 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/buzz.css">
+    <link rel="icon" href="./assets/team-group-svgrepo-com.svg">
+    <title>StartDeas</title>
+</head>
+
+<body>
+    <header class="header">
+        <a href=""><img src="{{ url_for('static', filename='assets/Ascend.jpeg') }}" alt="logo" class="logo"></a>
+        <nav class="navbar">
+            <a href="{{ url_for('landing') }}" style="color: black">Home</a>
+            <a href="{{ url_for('explore') }}"style="color: black">Explore</a>
+            <a href="{{ url_for('aboutus') }}" style="color: black">About</a>
+            <a href="{{ url_for('chatbot') }}" style="color: black">Chatbot</a>
+            <a href="{{ url_for('blogs') }}"style="color: black">Blogs</a>
+            <a href="{{ url_for('profile') }}" style="color: black">Profile</a>
+        </nav>
+    </header>
+    
+    
+<div class="container">
+    <header class="top">
+        <h1>StartDeas</h1>
+        <form class="search-box">
+            <input type="search" placeholder="The field that i want to bring my startup">
+        </form>
+        <p>Results Count : 0</p>
+    </header>
+    <div class="results"></div>
+</div>
+<script src="static/js/buzz.js"></script>
+</body>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>About</h4>
+            <a href="{{ url_for('aboutus') }}">About Us</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('explore') }}">Careers</a>
+        </div>
+        <div class="footer-section">
+            <h4>Resources</h4>
+            <a href="{{ url_for('blogs') }}">Blog</a>
+            <!--a href="#">Guides</a-->
+            <a href="{{ url_for('joinus') }}">Join Us</a>
+        </div>
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <a href="{{ url_for('privacypolicy') }}" style="text-decoration: none">Privacy Policy</a>
+            <a href="{{ url_for('Terms') }}">Terms of Service</a>
+        </div>
+        <div class="footer-section">
+            <h4>Connect</h4>
+            <a href="https://x.com/AscendVvit">Twitter</a>
+            <a href="https://www.linkedin.com/in/ascend-vvit-963b9b352/">LinkedIn</a>
+            <a href="#">Facebook</a>
+        </div>
+    </div>
+</footer>
+
+
+
+</html>

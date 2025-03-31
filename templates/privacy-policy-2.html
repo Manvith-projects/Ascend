@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Ascend Career Guidance</title>
+    <link rel="icon" href="static/assets/Alogo.jpeg">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/privacy_styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script defer src="static/js/privacy_script.js"></script>
+    <style>
+        .explore-btn {
+            padding: 10px 20px;
+            background-color: #006400;
+            color:#fff ;
+            border: none;
+            margin-left: 50%;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        .sign{
+            margin-left: 40%;
+            margin-right: 30%;
+        }
+        button a {
+            text-decoration: none;
+            color: white !important;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        button {
+            background-color: #3498db;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href=""><img src="{{ url_for('static', filename='assets/Ascend.jpeg') }}" alt="logo" class="logo"></a>
+        </div>
+        <h1>Privacy Policy</h1>
+    </header>
+
+    <main>
+        <section class="policy">
+            <h2>Introduction</h2>
+            <p>Welcome to ASCEND - Advanced Support for Career Exploration and Navigating Directions. We are committed to protecting your privacy and ensuring a safe and enriching career guidance experience.</p>
+        </section>
+
+        <section class="policy">
+            <h2>Information We Collect</h2>
+            <p>To provide you with personalized career guidance, mentorship programs, and interactive tools, we collect the following information:</p>
+            <ul>
+                <li><strong>Personal Information:</strong> Name, age, email address, contact details.</li>
+                <li><strong>Account Links:</strong> Links to your user pages on other platforms (e.g., LinkedIn).</li>
+                <li><strong>Educational Details:</strong> Information about your educational background, including AICTE ID and Superset ID.</li>
+                <li><strong>Resume Information:</strong> Details extracted from uploaded resumes, including skills and experience.</li>
+                <li><strong>Search Data:</strong> Information related to your career searches, preferences, and interactions with our platform.</li>
+                <li><strong>Location Data:</strong> Location information provided by you for job search and career prediction purposes.</li>
+                <li><strong>Preference Data:</strong> Data related to your interests and strengths, used for AI-powered career recommendations.</li>
+            </ul>
+        </section>
+
+        <section class="policy">
+            <h2>How We Use Your Information</h2>
+            <p>We use the collected information to:</p>
+            <ul>
+                <li>Provide AI-powered career predictions and personalized guidance.</li>
+                <li>Facilitate mentorship programs and connect you with mentors.</li>
+                <li>Deliver interactive tools and resources to explore various career paths.</li>
+                <li>Analyze your preferences and suggest dynamic career pathways.</li>
+                <li>Recommend articles, guides, and videos based on your profile and interests.</li>
+                <li>Analyze job markets and provide detailed reports on career demand and skill gaps.</li>
+                <li>Create personalized learning plans for skill development.</li>
+                <li>Send you updates and notifications via email, if you opt-in.</li>
+                <li>Ensure the security and integrity of our platform.</li>
+            </ul>
+            <p>Your data is not shared with any third-party partners and is not used for personal gain by our developers.</p>
+        </section>
+
+        <section class="policy">
+            <h2>AI and Machine Learning Usage</h2>
+            <p>We utilize AI models, including Generative AI (GPT, GANs) and Machine Learning algorithms (Scikit-learn, XGBoost), to provide personalized career guidance, generate video tutorials, and analyze market trends. These models analyze your preferences and skills to recommend suitable career paths and learning plans.</p>
+        </section>
+
+        <section class="policy">
+            <h2>Cookie and Tracking Technologies</h2>
+            <p>Currently, we do not use cookies or other tracking technologies. However, you can set your location in your profile or during job searches to enhance prediction accuracy.</p>
+        </section>
+
+        <section class="policy">
+            <h2>Third-Party Data Sharing</h2>
+            <p>We do not share your data with any third-party websites or services.</p>
+        </section>
+
+        <section class="policy">
+            <h2>Data Security Measures</h2>
+            <p>We employ basic data security measures, including user login credentials and potential Google/LinkedIn login options. We will update this policy if we implement additional security features, such as facial recognition.</p>
+        </section>
+
+        <section class="policy">
+            <h2>Children's Privacy</h2>
+            <p>Users must confirm they are 16 years or older to provide detailed information and receive age-appropriate career suggestions. Users under 16 can search for careers but cannot apply for jobs. Our website does not contain sensitive content, ensuring a safe search environment for younger users.</p>
+        </section>
+
+        <section class="policy">
+            <h2>International Data Transfers</h2>
+            <p>Our platform is accessible to users worldwide. Currently, user data is accessible only through personal login credentials. If we implement social media integration or other public data features, we will update this policy.</p>
+        </section>
+
+        <section class="policy">
+            <h2>Policy Updates</h2>
+            <p>We will notify users of policy updates through chatbots or other notification systems on our website.</p>
+        </section>
+
+        <section class="policy">
+            <h2>User Choices and Control</h2>
+            <p>While we do not currently offer a newsletter, users can access news and updates on our website. You can modify your educational details and delete your account at any time.</p>
+        </section>
+
+        <section class="policy">
+            <h2>Contact Information</h2>
+            <p>For any questions or complaints, please visit our <a href="ContactUs.html">Contact Us</a> page, where you can fill out a Google Form, find our physical contact number, email address, and social media links.</p>
+        </section>
+    </main>
+    <p class="sign">To Know more please login and shape your career with us</p>
+<button class="explore-btn"><a href="{{url_for('login')}}">Signup</a></button>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About</h4>
+                <a href="#">About Us</a>
+                <a href="ContactUs.html">Contact</a>
+                <a href="#">Careers</a>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="#">Blog</a>
+                <a href="#">Guides</a>
+                <a href="#">Research</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="Terms of Service.html">Terms of Service</a>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="privacy_script.js"></script>
+</body>
+</html>

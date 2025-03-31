@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="static/assets/Alogo.jpeg">
+    <title>Job Role Prediction</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f7f6;
+            padding: 20px;
+        }
+        
+        h2 {
+            color: #333;
+        }
+
+        form {
+            max-width: 450px;
+            margin: auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        input:focus, select:focus {
+            border-color: #0073b1;
+            outline: none;
+            box-shadow: 0px 0px 6px rgba(0, 115, 177, 0.4);
+        }
+
+        button {
+            background-color: #0073b1;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background-color: #005a8c;
+        }
+        
+        .search-container {
+            position: relative;
+        }
+        
+        .dropdown-list {
+            position: absolute;
+            width: 100%;
+            max-height: 150px;
+            overflow-y: auto;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dropdown-list div {
+            padding: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .dropdown-list div:hover {
+            background-color: #f0f0f0;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            border: 1px solid #ccc;
+            padding: 8px;
+            min-height: 40px;
+            border-radius: 6px;
+            background: #fafafa;
+            cursor: pointer;
+        }
+        
+        .skill-tag {
+            background-color: #0073b1;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        
+        .skill-tag span {
+            margin-left: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        .skill-tag span:hover {
+            color: #ff4c4c;
+        }
+        
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #0073b1;
+        }
+    </style>
+</head>
+<body>
+    <h2>Enter Job Details</h2>
+    <hr>
+    <form id="ajaxForm">
+        <div class="search-container">
+            <input type="text" id="industry_search" class="search-input" placeholder="Search Industry...">
+            <div id="industry_list" class="dropdown-list"></div>
+        </div>
+        <div class="search-container">
+            <input type="text" id="department_search" class="search-input" placeholder="Search Department...">
+            <div id="department_list" class="dropdown-list"></div>
+        </div>
+        <div class="search-container">
+            <input type="text" id="role_search" class="search-input" placeholder="Search Role Category...">
+            <div id="role_list" class="dropdown-list"></div>
+        </div>
+        <label>Key Skills:</label>
+        <div class="search-container">
+            <input type="text" id="skills_search" class="search-input" placeholder="Search Skills...">
+            <div id="skills_list" class="dropdown-list"></div>
+        </div>
+        <div class="skills-container" id="skillsContainer"></div>
+        <button type="submit">Predict Role</button>
+    </form>
+    <h3 id="result"></h3>
+
+
+
+    <script>
+        let industrySet = new Set();
+        let departmentSet = new Set();
+        let roleSet = new Set();
+        let skillsSet = new Set();
+
+        async function loadCSV() {
+            try {
+                const response = await fetch("/static/dataset/DataSet.csv");
+                const csvData = await response.text();
+
+                Papa.parse(csvData, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function(results) {
+                        const data = results.data;
+
+                        data.forEach(row => {
+                            if (row["industry_type"]) industrySet.add(row["industry_type"].replace(/\[|\]/g, "").trim());
+                            if (row["department"]) departmentSet.add(row["department"].replace(/\[|\]/g, "").trim());
+                            if (row["role_category"]) roleSet.add(row["role_category"].replace(/\[|\]/g, "").trim());
+                            if (row["key_skills"]) {
+                                row["key_skills"].replace(/\[|\]/g, "").split(/[;,]/).forEach(skill => {  
+                                    let trimmedSkill = skill.trim();
+                                    if (trimmedSkill) skillsSet.add(trimmedSkill);
+                                });
+                            }
+                        });
+
+                        setupSearch("industry", industrySet);
+                        setupSearch("department", departmentSet);
+                        setupSearch("role", roleSet);
+                        setupSearch("skills", skillsSet);
+                    }
+                });
+            } catch (error) {
+                console.error("Error loading CSV:", error);
+            }
+        }
+
+        function setupSearch(id, dataSet) {
+            const input = document.getElementById(`${id}_search`);
+            const list = document.getElementById(`${id}_list`);
+            const container = document.getElementById("skillsContainer");
+
+            function updateList(filter) {
+                list.innerHTML = "";
+                let filtered = Array.from(dataSet).filter(item => item.toLowerCase().includes(filter.toLowerCase()));
+                filtered.forEach(item => {
+                    let div = document.createElement("div");
+                    div.textContent = item;
+                    div.onclick = () => {
+                        input.value = item;
+                        list.style.display = "none";
+
+                        if (id === "skills") {
+                            addSkill(item, container);
+                        }
+                    };
+                    list.appendChild(div);
+                });
+                list.style.display = filtered.length ? "block" : "none";
+            }
+
+            input.addEventListener("input", () => updateList(input.value));
+            input.addEventListener("focus", () => updateList(input.value));
+            document.addEventListener("click", e => { if (!input.contains(e.target) && !list.contains(e.target)) list.style.display = "none"; });
+        }
+
+        function addSkill(skill, container) {
+            if (Array.from(container.children).some(tag => tag.textContent.includes(skill))) return;
+
+            let tag = document.createElement("div");
+            tag.className = "skill-tag";
+            tag.textContent = skill;
+
+            let removeBtn = document.createElement("span");
+            removeBtn.textContent = "×";
+            removeBtn.onclick = () => tag.remove();
+
+            tag.appendChild(removeBtn);
+            container.appendChild(tag);
+        }
+
+        document.getElementById("ajaxForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let industry_type = document.getElementById("industry_search").value.trim();
+            let department = document.getElementById("department_search").value.trim();
+            let role_category = document.getElementById("role_search").value.trim();
+            let key_skills = Array.from(document.getElementById("skillsContainer").children)
+                                  .map(tag => tag.textContent.replace("×", "").trim())
+                                  .join(", ");
+
+            let requestData = {
+                industry_type: industry_type,
+                department: department,
+                role_category: role_category,
+                key_skills: key_skills
+            };
+
+            fetch("/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerText = "Predicted Role: " + data.predicted_role;
+            })
+            .catch(error => console.error("Error:", error));
+        });
+
+        loadCSV();
+    </script>
+</body>
+
+</html>

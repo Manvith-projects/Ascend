@@ -1,0 +1,123 @@
+{
+    "intents": [
+      {
+        "tag": "greeting",
+        "patterns": ["Hello", "Hi", "Hey", "Good morning", "Good evening"],
+        "responses": ["Hello! How can I assist you with your career today?", "Hi there! What career advice do you need?", "Hey! How can I help you?"]
+      },
+      {
+        "tag": "career_path",
+        "patterns": ["career path", "career change", "switch careers", "new career"],
+        "responses": [
+          "When considering a career path, it's important to assess your interests, skills, and values. What specific field interests you?",
+          "Career changes are common! Start by researching your target field, networking, and possibly taking relevant courses or certifications.",
+          "Consider talking to professionals in your desired field to get real insights about the day-to-day work."
+        ]
+      },
+      {
+        "tag": "resume",
+        "patterns": ["resume", "cv", "curriculum vitae"],
+        "responses": [
+          "Your resume should highlight your achievements rather than just listing responsibilities. Use action verbs and quantify results when possible.",
+          "Keep your resume concise, well-organized, and tailored to each job application.",
+          "Include relevant skills and experiences that match the job requirements you're applying for."
+        ]
+      },
+      {
+        "tag": "interview",
+        "patterns": ["interview", "interviewing", "job interview"],
+        "responses": [
+          "Prepare for interviews by researching the company, practicing common questions, and preparing relevant examples of your work.",
+          "Remember to ask thoughtful questions during the interview - it shows your interest and engagement.",
+          "Use the STAR method (Situation, Task, Action, Result) to structure your responses to behavioral questions."
+        ]
+      },
+      {
+        "tag": "skills",
+        "patterns": ["skills", "learn", "improve", "develop"],
+        "responses": [
+          "Consider both technical and soft skills in your field. What specific skills are you looking to develop?",
+          "Online platforms like Coursera, LinkedIn Learning, and industry-specific certifications can help you build new skills.",
+          "Don't forget about soft skills like communication, leadership, and problem-solving - they're valuable in any career."
+        ]
+      },
+      {
+        "tag": "networking",
+        "patterns": ["network", "networking", "connections", "linkedin"],
+        "responses": [
+          "Build your professional network through LinkedIn, industry events, and professional associations.",
+          "Quality matters more than quantity in networking. Focus on building meaningful professional relationships.",
+          "Regular engagement with your network is key - share relevant content and stay in touch with your connections."
+        ]
+      },
+      {
+        "tag": "career_guidance",
+        "patterns": ["What career is best for me?", "How do I choose a career?", "I need career guidance"],
+        "responses": [
+          "Choosing a career depends on your skills, interests, and goals. What are your strengths?",
+          "I can help! Tell me about your interests and skills, and I'll suggest career options.",
+          "Career selection is important. Do you prefer technical or creative fields?"
+        ]
+      },
+      {
+        "tag": "tech_career",
+        "patterns": ["Should I learn programming?", "Is software development a good career?", "Tell me about tech careers"],
+        "responses": [
+          "Tech careers like software development, data science, and cybersecurity are in demand! What interests you the most?",
+          "Programming is a great skill. Are you interested in web development, AI, or app development?",
+          "The tech industry is growing rapidly! Learning Python, JavaScript, or Java can open many doors."
+        ]
+      },
+      {
+        "tag": "non_tech_career",
+        "patterns": ["I don't like coding, what are my options?", "What careers don’t require programming?"],
+        "responses": [
+          "There are many options like marketing, finance, design, and management. What field interests you?",
+          "You can explore careers in business, psychology, content creation, or even entrepreneurship!",
+          "Not everyone needs to code! Fields like journalism, law, and healthcare are great options too."
+        ]
+      },
+      {
+        "tag": "resume_tips",
+        "patterns": ["How do I write a good resume?", "Resume tips", "What should I include in my resume?"],
+        "responses": [
+          "A strong resume includes a clear summary, work experience, skills, and projects. Would you like me to suggest a format?",
+          "Highlight your achievements, skills, and relevant experiences. Tailor it to the job you’re applying for.",
+          "Make sure your resume is clear, concise, and free from errors. Need help with a resume template?"
+        ]
+      },
+      {
+        "tag": "interview_tips",
+        "patterns": ["How do I prepare for an interview?", "Interview tips", "What are common interview questions?"],
+        "responses": [
+          "Prepare by researching the company, practicing common questions, and being confident. Do you need help with specific questions?",
+          "Practice answering behavioral and technical questions. Want me to generate some for you?",
+          "Be confident, dress professionally, and research the company. Need help with mock interviews?"
+        ]
+      },
+      {
+        "tag": "career_change",
+        "patterns": ["I want to change careers", "How do I switch careers?", "Is it too late to change my career?"],
+        "responses": [
+          "It’s never too late to switch careers! Identify your transferable skills and start learning new ones.",
+          "Changing careers can be exciting! Do you have a new field in mind, or would you like some suggestions?",
+          "Many people successfully switch careers. Let’s discuss your skills and interests to find the best path."
+        ]
+      },
+      {
+        "tag": "freelancing",
+        "patterns": ["How do I start freelancing?", "Freelancing tips", "Best freelance platforms?"],
+        "responses": [
+          "Freelancing is a great way to gain experience! Platforms like Upwork, Fiverr, and Freelancer can help you start.",
+          "To start freelancing, build a portfolio, create a profile on freelancing sites, and start pitching to clients.",
+          "Freelancing requires consistency and good communication. Would you like advice on a specific skill or niche?"
+        ]
+      },
+      {
+        "tag": "goodbye",
+        "patterns": ["Bye", "Goodbye", "See you later"],
+        "responses": ["Goodbye! Best of luck with your career!", "See you soon! Keep working towards your goals!", "Take care and keep learning!"]
+      }
+    ]
+  }
+  

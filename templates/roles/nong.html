@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Finder</title>
+    <link rel="stylesheet" href="nong.css">
+</head>
+<header class="header">
+    <a href="get_started.html"><img src="Ascend.jpeg" class="logo" alt="Logo"></a>
+    <nav class="navbar">
+        <a href="Home.html">Home</a>
+        <a href="explore.html">Explore</a>
+        <a href="still_in_progress.html">About</a>
+        <a href="chatbot.html">Contact</a>
+        <a href="index.html">Logout</a>
+    </nav>
+</header>
+
+<body>
+<div class="Model-Countainer">
+    <h1>Job Finder</h1>
+    <form id="job-form">
+        <label for="industry-type">Industry Type:</label>
+        <select id="industry-type" name="industry-type">
+            <option value="">Select Industry Type</option>
+            <!-- Options will be populated dynamically -->
+        </select>
+
+        <label for="role-category">Role Category:</label>
+        <select id="role-category" name="role-category">
+            <option value="">Select Role Category</option>
+            <!-- Options will be populated dynamically -->
+        </select>
+
+        <label for="department">Department:</label>
+        <select id="department" name="department">
+            <option value="">Select Department</option>
+            <!-- Options will be populated dynamically -->
+        </select>
+
+        <div id="skills-panel">
+            <!-- Key skills checkboxes will be populated dynamically -->
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+    <div id="or-text">OR</div>
+
+    <div class="resume-button-container">
+        <button class="resume-button" onclick="window.location.href='resumepredict.html'">Upload Resume</button>
+    </div>
+</div>
+
+<script src="nong.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Recommendation</title>
+</head>
+<body>
+<h1>Career Recommendation System</h1>
+<form id="careerForm">
+    <label>Career Interests: <input type="text" name="career_interests"></label><br>
+    <label>Academic Background: <input type="text" name="academic_background"></label><br>
+    <label>Specific Skills: <input type="text" name="skills"></label><br>
+    <button type="submit">Get Recommendation</button>
+</form>
+
+<h2>Recommendation:</h2>
+<p id="result"></p>
+
+<script>
+    document.getElementById("careerForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData.entries());
+
+        const response = await fetch("http://127.0.0.1:8000/recommend", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+        document.getElementById("result").innerText = result.recommendation || "Error getting recommendation.";
+    });
+</script>
+</body>
+</html>

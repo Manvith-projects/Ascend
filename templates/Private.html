@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="https://drive.google.com/file/d/13ctGlnfNCa0TVEuBPPo8RxR8H-mJg3BO/view?usp=sharing">
+
+  <link rel="stylesheet" href="static/css/Private.css"/>
+  <link rel="icon" href="static/assets/Alogo.jpeg">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <title>Private Sector</title>
+</head>
+<body>
+<!---navbar-->
+<header class="header">
+  <img src="{{ url_for('static', filename='assets/Ascend.jpeg') }}" class="logo" alt="Logo">
+  <nav class="navbar">
+     <a href="{{ url_for('landing') }}" >Home</a>
+    <a href="{{ url_for('explore') }}">Explore</a>
+    <a href="{{ url_for('still_in_progress') }}" >About</a>
+    <a href="{{ url_for('chatbot') }}" >Chatbot</a>
+    <a href="{{ url_for('blogs') }}">Blogs</a>
+    <a href="{{ url_for('index') }}" >Logout</a>
+  </nav>
+</header>
+
+<!---NavBar End--->
+<!-- the main content--->
+<div class="container mt-3">
+  <div class="row">
+    <!--- start of the section one--->
+    <div class="col d-flex flex-row justify-content-between">
+      <div class="item-one">
+        <h1 class="text-heading text-center mt-4">Private Sector</h1>
+        <hr/>
+        <h1 class="text-center mt-4">
+          Select the career path you want to continue in the private sector
+        </h1>
+      </div>
+      <img src="{{ url_for('static', filename='assets/on-the-office-animate.svg') }}" class="svg-image" alt="the image"/>
+    </div>
+    <!--- end of the section one--->
+
+    <!-- Buttons positioned at the bottom left and right -->
+    <div class="row position-absolute bottom-0 start-0 p-3">
+      <div class="col-6 d-flex justify-content-start">
+        <a href="{{ url_for('JobSearch') }}" class="btn btn-primary"> Find my Career</a>
+      </div>
+      <div class="col-6 d-flex justify-content-end">
+        <a href="{{ url_for('interview') }}" class="btn btn-secondary">Interview</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-content">
+      <div class="footer-section">
+          <h4>About</h4>
+          <a href="{{ url_for('aboutus') }}">About Us</a>
+          <a href="{{ url_for('contact') }}">Contact</a>
+          <a href="{{ url_for('explore') }}">Careers</a>
+      </div>
+      <div class="footer-section">
+          <h4>Resources</h4>
+          <a href="{{ url_for('blogs') }}">Blog</a>
+          <!--a href="#">Guides</a-->
+          <a href="{{ url_for('joinus') }}">Join Us</a>
+      </div>
+      <div class="footer-section">
+          <h4>Legal</h4>
+          <a href="{{ url_for('privacypolicy') }}" style="text-decoration: none">Privacy Policy</a>
+          <a href="{{ url_for('Terms') }}">Terms of Service</a>
+      </div>
+      <div class="footer-section">
+          <h4>Connect</h4>
+          <a href="https://x.com/AscendVvit">Twitter</a>
+          <a href="https://www.linkedin.com/in/ascend-vvit-963b9b352/">LinkedIn</a>
+          <a href="#">Facebook</a>
+      </div>
+  </div>
+</footer>
+
+</body>
+</html>

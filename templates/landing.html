@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Guidance Platform</title>
+    <link rel="stylesheet" href="static/css/style_landing.css">
+    <link rel="icon" href="static/assets/Alogo.jpeg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .job-item {
+            background: white;
+            color: black;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .view-job-btn {
+            background-color: #0073b1;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .view-job-btn:hover {
+            background-color: #005582;
+        }
+        .s{
+            color: black;
+        }
+    </style>
+</head>
+<header class="header">
+    <a href=""><img src="{{ url_for('static', filename='assets/Ascend.jpeg') }}" alt="logo" class="logo"></a>
+    <nav class="navbar">
+        <a href="{{ url_for('landing') }}" style="color: white">Home</a>
+        <a href="{{ url_for('explore') }}"style="color: white">Explore</a>
+        <a href="{{ url_for('chatbot') }}" style="color: white">Chatbot</a>
+        <a href="{{ url_for('blogs') }}">Blogs</a>
+        <a href="{{ url_for('profile') }}" style="color: white">Profile</a>
+        <a href="{{ url_for('logout') }}"  style="color: white; text-decoration: none;">logout</a>
+    </nav>
+</header>
+<body>
+<section class="hero">
+    <h1>Your Career Journey Starts Here</h1>
+    <p>Discover your perfect career path with AI-powered guidance, expert mentorship, and comprehensive resources.</p>
+
+    <div class="search-section">
+        <form class="search-box" onsubmit="searchJobs(event)">
+            <input type="text" id="query" class="search-input" placeholder="Search by skill, job title, or company" required>
+            <input type="text" id="location" class="search-input" placeholder="Location">
+            <button type="submit" class="search-button">🔍 Search</button>
+        </form>
+        <p style="color: black;">Over <strong>100,000+</strong> career opportunities available</p>
+        <div id="results"></div>
+        <div id="pagination" class="pagination-controls"></div>
+    </div>
+</section>
+
+<div class="quick-links">
+    <a href="{{url_for('careerconfusion')}}" style="color: black">
+        <div class="quick-link-card">
+            <i class="fas fa-rocket"></i>
+            <h3>Recomendation</h3>
+            <p>By Your's</p>
+        </div>
+    </a>
+    <a href="{{url_for('learn')}}" style="color: black">
+        <div class="quick-link-card">
+            <i class="fas fa-book"></i>
+            <h3>Learn</h3>
+            <p>Skill development</p>
+        </div>
+    </a>
+    <a href="{{ url_for('connect') }}"style="color: black">
+        <div class="quick-link-card">
+            <i class="fas fa-users"></i>
+            <h3>Connect</h3>
+            <p>Meet mentors</p>
+        </div>
+    </a>
+    <a href="{{ url_for('nong') }}"style="color: black">
+        <div class="quick-link-card">
+            <i class="fas fa-briefcase"></i>
+            <h3>Apply</h3>
+            <p>Find opportunities</p>
+        </div>
+    </a>
+</div>
+
+<div class="features-grid">
+    <a href="{{ url_for('Private') }}" style="color: black">
+        <div class="feature-card">
+            <i class="fas fa-robot icon"></i>
+            <h3>AI-Powered Career Guidance</h3>
+            <p>Get personalized career recommendations based on your interests and strengths.</p>
+            <ul class="feature-list">
+                <li>Personalized Career Matching</li>
+                <li>Aptitude Assessment</li>
+                <li>Skill Analysis</li>
+            </ul>
+        </div>
+    </a>
+    <a href="{{ url_for('mentor') }}" style="color: black">
+        <div class="feature-card">
+            <i class="fas fa-user-tie icon"></i>
+            <h3>Career Mentorship</h3>
+            <p>This mentor bot analyze your situation and provides a grate career advice.</p>
+            <ul class="feature-list">
+                <li>Chat with MentorBot</li>
+                <li>Industry Insights</li>
+                <li>Professional Suggestions</li>
+            </ul>
+        </div>
+    </a>
+    <a href="{{ url_for('PublicSector') }}" style="color:black">
+        <div class="feature-card">
+            <i class="fas fa-building icon"></i>
+            <h3>Public Pathways</h3>
+            <p>Access comprehensive learning materials and career development tools.</p>
+            <ul class="feature-list">
+                <li>Different Public sector jobs</li>
+                <li>Key Duties</li>
+                <li>Skill & Qualification</li>
+            </ul>
+        </div>
+    </a>
+    <a href="{{ url_for('trend') }}" style="color: black">
+        <div class="feature-card">
+            <i class="fas fa-chart-line icon"></i>
+            <h3>Market Trends & Jobs</h3>
+            <p>Stay updated with latest job trends and opportunities.</p>
+            <ul class="feature-list">
+                <li>Job Market Analysis</li>
+                <li>Trending Roles</li>
+                <li>Salary Insights</li>
+            </ul>
+        </div>
+    </a>
+    <a href="{{ url_for('AfterSchool') }}" style="color: black">
+        <div class="feature-card">
+            <i class="fas fa-graduation-cap icon"></i>
+            <h3>Student Support</h3>
+            <p>Special guidance for 10th,12th grade students and also for higher education.</p>
+            <ul class="feature-list">
+                <li>Stream Selection</li>
+                <li>College Planning</li>
+                <li>Career Roadmaps</li>
+            </ul>
+        </div>
+    </a>
+    <a href="{{url_for('startup')}}" style="color: black">
+        <div class="feature-card">
+            <i class="fas fa-lightbulb icon"></i>
+            <h3>Startup Ideas</h3>
+            <p>Explore entrepreneurship opportunities and guidance.</p>
+            <ul class="feature-list">
+                <li>Understanding Depth</li>
+                <li>Market Research</li>
+                <li>Existing Ones</li>
+            </ul>
+        </div>
+    </a>
+</div>
+
+<section class="stats-section">
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number">100K+</div>
+            <p>Career Opportunities</p>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">50K+</div>
+            <p>Success Stories</p>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">1000+</div>
+            <p>Expert Mentors</p>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">200+</div>
+            <p>Learning Paths</p>
+        </div>
+    </div>
+</section>
+
+<section class="trusted-companies">
+    <h2>Trusted by Leading Companies</h2>
+    <div class="company-logos">
+        <img src="https://www.instagram.com/naukridotcom/" alt="Naukari" class="company-logo">
+        <img src="https://www.pngwing.com/en/search?q=infosys" alt="Infosys" class="company-logo">
+        <img src="https://freebiesupply.com/logos/deloitte-logo/" alt="Google" class="company-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Google_Chrome_icon_%282011-2022%29.svg/640px-Google_Chrome_icon_%282011-2022%29.svg" alt="OpenAI" class="company-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Google_Chrome_icon_%282011-2022%29.svg/640px-Google_Chrome_icon_%282011-2022%29.svg" alt="Vercel" class="company-logo">
+    </div>
+</section>
+
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>About</h4>
+            <a href="{{ url_for('aboutus') }}">About Us</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('explore') }}">Careers</a>
+        </div>
+        <div class="footer-section">
+            <h4>Resources</h4>
+            <a href="{{ url_for('blogs') }}">Blog</a>
+            <!--a href="#">Guides</a-->
+            <a href="{{ url_for('joinus') }}">Join Us</a>
+        </div>
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <a href="{{ url_for('privacypolicy') }}" style="text-decoration: none">Privacy Policy</a>
+            <a href="{{ url_for('Terms') }}">Terms of Service</a>
+        </div>
+        <div class="footer-section">
+            <h4>Connect</h4>
+            <a href="https://x.com/AscendVvit">Twitter</a>
+            <a href="https://www.linkedin.com/in/ascend-vvit-963b9b352/">LinkedIn</a>
+            <a href="#">Facebook</a>
+        </div>
+    </div>
+</footer>
+<script>
+    let currentPage = 1;
+
+    async function searchJobs(event, page = 1) {
+        if (event) event.preventDefault();
+
+        const title = document.getElementById("query").value;
+        const location = document.getElementById("location").value;
+        const resultsContainer = document.getElementById("results");
+        const paginationContainer = document.getElementById("pagination");
+
+        resultsContainer.innerHTML = "<p class='s'>Searching for jobs...</p>";
+
+        try {
+            const response = await fetch(`/search-jobs?title=${title}&location=${location}&page=${page}`);
+            const data = await response.json();
+
+            console.log("Received Data:", data);
+
+            if (!data.data || !data.data.length) {
+                resultsContainer.innerHTML = "<p class='s'>No jobs found.</p>";
+                paginationContainer.innerHTML = "";
+                return;
+            }
+
+            resultsContainer.innerHTML = data.data.map(job => `
+                    <div class="job-item">
+                        <h3>${job.job_title}</h3>
+                        <p><strong>Company:</strong> ${job.employer_name || "Unknown"}</p>
+                        <p><strong>Location:</strong> ${job.job_city || "Remote"}</p>
+                        <a href="${job.job_apply_link}" class="view-job-btn" target="_blank">View Job</a>
+                    </div>
+                `).join("");
+
+            currentPage = page;
+            paginationContainer.innerHTML = `
+                    <button onclick="searchJobs(null, ${currentPage - 1})" ${currentPage === 1 ? "disabled" : ""}>Previous</button>
+                    <span>Page ${currentPage}</span>
+                    <button onclick="searchJobs(null, ${currentPage + 1})">Next</button>
+                `;
+
+        } catch (error) {
+            console.error("Error fetching jobs:", error);
+            resultsContainer.innerHTML = `<p class='s'>Error fetching jobs: ${error.message}</p>`;
+        }
+    }
+</script>
+<script src="static/js/landing_main.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+<script>
+    if (!firebase.apps.length) {
+    firebase.initializeApp({
+        apiKey: "AIzaSyCX5fg4A-OYjtapDOKyOUd0iTnxrKX4t7Y",
+        authDomain: "career-mentor-dbffc.firebaseapp.com",
+        projectId: "career-mentor-dbffc",
+        storageBucket: "career-mentor-dbffc.appspot.com",
+        messagingSenderId: "632733746095",
+        appId: "1:632733746095:web:df7f51f135cbdb552d255a",
+        measurementId: "G-PPZRTYYGM6"
+    });
+}
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+    document.addEventListener("DOMContentLoaded", function () {
+        firebase.auth().onAuthStateChanged(user => {
+            if (!user) {
+                // Redirect to login page if not authenticated
+                window.location.href = "login.html";
+            }
+        });
+    });
+
+    "use strict";
+
+document.addEventListener("DOMContentLoaded", function () {
+    auth.onAuthStateChanged((user) => {
+        if (!user) {
+            // Redirect to login if user is not authenticated
+            window.location.href = "{{ url_for('login') }}";
+        }
+    });
+});
+</script>
+
+</body>
+</html>

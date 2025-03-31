@@ -1,0 +1,134 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    max-width: 800px;
+    max-height: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+select, button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+#skills-panel {
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+#output-container, #chatbot-container {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#more-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#more-button:hover {
+    background-color: #2980b9;
+}
+
+/* Specific styling for the buttons */
+button[type="submit"] {
+    background-color: mediumblue;
+    color: white;
+    border: none;
+}
+
+button[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+.resume-button-container {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.resume-button {
+    background-color: darkviolet;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: auto;
+    display: inline-block;
+}
+
+.resume-button:hover {
+    background-color: #c0392b;
+}
+
+/* Adjust the OR text styling */
+#or-text {
+    text-align: center;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+
+}
+
+.logo {
+    max-width: 150px;
+    padding: 10px;
+    border-radius: 35px;
+
+}
+
+.navbar a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 1rem;
+}
+
+.navbar a:hover {
+    color: #71c397;
+}

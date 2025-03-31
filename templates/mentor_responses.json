@@ -1,0 +1,47 @@
+[
+  {
+    "category": "career_path",
+    "keywords": ["career path", "career change", "switch careers", "new career"],
+    "responses": [
+      "When considering a career path, it's important to assess your interests, skills, and values. What specific field interests you?",
+      "Career changes are common! Start by researching your target field, networking, and possibly taking relevant courses or certifications.",
+      "Consider talking to professionals in your desired field to get real insights about the day-to-day work."
+    ]
+  },
+  {
+    "category": "resume",
+    "keywords": ["resume", "cv", "curriculum vitae"],
+    "responses": [
+      "Your resume should highlight your achievements rather than just listing responsibilities. Use action verbs and quantify results when possible.",
+      "Keep your resume concise, well-organized, and tailored to each job application.",
+      "Include relevant skills and experiences that match the job requirements you're applying for."
+    ]
+  },
+  {
+    "category": "interview",
+    "keywords": ["interview", "interviewing", "job interview"],
+    "responses": [
+      "Prepare for interviews by researching the company, practicing common questions, and preparing relevant examples of your work.",
+      "Remember to ask thoughtful questions during the interview - it shows your interest and engagement.",
+      "Use the STAR method (Situation, Task, Action, Result) to structure your responses to behavioral questions."
+    ]
+  },
+  {
+    "category": "skills",
+    "keywords": ["skills", "learn", "improve", "develop"],
+    "responses": [
+      "Consider both technical and soft skills in your field. What specific skills are you looking to develop?",
+      "Online platforms like Coursera, LinkedIn Learning, and industry-specific certifications can help you build new skills.",
+      "Don't forget about soft skills like communication, leadership, and problem-solving - they're valuable in any career."
+    ]
+  },
+  {
+    "category": "networking",
+    "keywords": ["network", "networking", "connections", "linkedin"],
+    "responses": [
+      "Build your professional network through LinkedIn, industry events, and professional associations.",
+      "Quality matters more than quantity in networking. Focus on building meaningful professional relationships.",
+      "Regular engagement with your network is key - share relevant content and stay in touch with your connections."
+    ]
+  }
+]

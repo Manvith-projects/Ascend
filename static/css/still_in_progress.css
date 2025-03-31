@@ -1,0 +1,185 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.6;
+    background-color: #fff;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    background-color:white;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2)
+}
+
+.logo {
+    max-width: 150px;
+    height: auto;
+    border-radius: 35px;
+
+}
+
+.navbar a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.navbar a:hover {
+    color: #71c397;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    padding: 1rem;
+    text-align: center;
+}
+
+.welcome-text {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #555;
+}
+
+.main-heading {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    cursor: pointer;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    width: 30%;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card-img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.card-link {
+    display: block;
+    font-size: 1.2rem;
+    color: #333;
+    text-decoration: none;
+    margin-top: 0.5rem;
+}
+
+.card-link:hover {
+    color: #71c397;
+}
+
+/* Assessment Section */
+.assessment {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #ffb27d;
+    border-radius: 8px;
+}
+
+.assessment h3 {
+    margin-bottom: 0.5rem;
+}
+
+.assessment p {
+    margin-bottom: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #71c397;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.btn:hover {
+    background-color: #5ca984;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #22272e;
+    color: #fff;
+}
+
+.brand {
+    color: #71c397;
+}
+
+.footer-links a {
+    color: #959cb6;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #71c397;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card {
+        width: 100%;
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .navbar a {
+        margin: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-heading {
+        font-size: 1.5rem;
+    }
+
+    .welcome-text {
+        font-size: 1.2rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+    }
+}

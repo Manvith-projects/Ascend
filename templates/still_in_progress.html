@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://s3.us-east-1.amazonaws.com/cdn.designcrowd.com/blog/120-cool-logos-for-a-fresh-new-look/finance-stock-market-capital-by-mypen-brandcrowd.png">
+    <title>Home</title>
+    <link rel="stylesheet" href="static/css/still_in_progress.css">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <img src="{{ url_for('static', filename='assets/un.png') }}" class="logo" alt="Logo">
+        <nav class="navbar">
+                  <a href="Home.html">Home</a>
+                  <a href="{{ url_for('explore') }}">Explore</a>
+                  <a href="#">About</a>
+            <a href="{{ url_for('login') }}">Contact</a>
+            <a href="{{ url_for('index') }}">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <h3 class="welcome-text">This Page Is</h3>
+        <h2 class="main-heading">Still Under Progress</h2>
+
+        <div class="assessment">
+            <h3>This feature will be added in the next update</h3>
+            <p>please stay tuned with us.</p>
+            <a href="Home.html" class="btn">Go to main page</a>
+        </div>
+    </main>
+    <!--  <footer class="footer">-->
+    <!--    <p>© 2023 ALL RIGHTS RESERVED</p>-->
+    <!--    <p>By <span class="brand">Career Dendrogram</span></p>-->
+    <!--    <div class="footer-links">-->
+    <!--      <a href="#">Privacy Policy</a>-->
+    <!--      <a href="#">Terms of Use</a>-->
+    <!--    </div>-->
+    <!--  </footer>-->
+</div>
+</body>
+</html>

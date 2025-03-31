@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Job Portal</title>
+    <link rel="stylesheet" href="public_style.css">
+
+</head>
+<header class="header container-fluid" >
+    <img src="Ascend.jpeg" class="logo" alt="Logo">
+    <nav class="navbar">
+        <a href="#">Home</a>
+        <a href="#">Explore</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+<body>
+<div class="top">
+    <div class="header-content">
+        <div class="header-text">
+            <h1>Public Pathways</h1>
+            <p>Explore Career Opportunities Across Various Government Sectors</p>
+        </div>
+        <div class="header-image">
+            <img src="https://karkhana.io/wp-content/uploads/2023/02/image-27.png" alt="government">
+        </div>
+    </div>
+</div>
+
+<main>
+    <section id="sectors-grid">
+        <div class="slider-container">
+            <div class="slider-track">
+                <!-- Sectors will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <section id="jobs-section" class="hidden">
+        <button id="back-button" class="back-btn">← Back to Sectors</button>
+        <h2 id="sector-title"></h2>
+        <div class="slider-container">
+            <div id="jobs-grid" class="slider-track">
+                <!-- Jobs will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <div id="job-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div id="modal-body">
+                <!-- Job details will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<script src="Public_data.js"></script>
+<script src="PublicSector_main.js"></script>
+</body>
+</html>
