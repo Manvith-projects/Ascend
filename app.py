@@ -29,6 +29,17 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY")
 
+
+import nltk
+import os
+
+nltk_data_path = "/opt/render/nltk_data"
+if not os.path.exists(nltk_data_path):
+    os.makedirs(nltk_data_path)
+
+nltk.data.path.append(nltk_data_path)
+nltk.download('punkt', download_dir=nltk_data_path)
+
 # ----------------------------------------------------------------------------login req----------------------------------------------------------------
 
 #------------------------------------------------------------------------------Routes----------------------------------------------------------------
@@ -529,15 +540,7 @@ def explore():
 
 
 
-import nltk
-import os
 
-nltk_data_path = "/opt/render/nltk_data"
-if not os.path.exists(nltk_data_path):
-    os.makedirs(nltk_data_path)
-
-nltk.data.path.append(nltk_data_path)
-nltk.download('punkt', download_dir=nltk_data_path)
 
 
 #-----------------------------------------------------------------------------------chatbot----------------------------------------------------------------------
